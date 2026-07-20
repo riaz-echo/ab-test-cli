@@ -1,5 +1,4 @@
 (() => {
-    console.log("PDP Reinforce Badge - test loaded");
     function waitForElem(waitFor, callback, minElements = 1, isVariable = false, timer = 10000, frequency = 25) {
         let elements = isVariable ? window[waitFor] : document.querySelectorAll(waitFor);
         if (timer <= 0) return;

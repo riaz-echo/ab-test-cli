@@ -28,7 +28,9 @@
 
     function getPriceContainer() {
         const offers = document.querySelector("#product-page-offers");
-        const titleEl = offers ? [...offers.querySelectorAll("div")].find((el) => el.children.length === 0 && el.textContent.trim().replace(/\.$/, "") === "Price/Ea") : null;
+        const titleEl = offers
+            ? [...offers.querySelectorAll("div")].find((el) => el.children.length === 0 && el.textContent.trim().replace(/\.$/, "") === "Price/Ea")
+            : null;
         return titleEl ? titleEl.parentElement : null;
     }
 
@@ -61,7 +63,7 @@
         if (contentObserver) contentObserver.disconnect();
         applySavings();
         if (contentObserver && root) {
-            contentObserver.observe(root, {childList: true, subtree: true, characterData: true});
+            contentObserver.observe(root, { childList: true, subtree: true, characterData: true });
         }
     }
 
@@ -82,7 +84,7 @@
             }
 
             contentObserver = new MutationObserver(run);
-            contentObserver.observe(offers, {childList: true, subtree: true, characterData: true});
+            contentObserver.observe(offers, { childList: true, subtree: true, characterData: true });
 
             safeApply(offers);
         }

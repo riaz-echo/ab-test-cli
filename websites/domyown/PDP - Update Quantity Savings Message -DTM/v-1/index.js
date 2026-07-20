@@ -1,13 +1,4 @@
 (() => {
-    const testInfo = {
-        id: "pdp-qty-savings",
-        name: "PDP - Update Quantity Savings Message [DTM]",
-        variation: 1,
-        version: "001",
-    };
-
-    const TEST_ID = "pdp-qty-savings";
-    const VARIANT_ID = "V1";
     const BODY_CLASS = "AB-pdp-qty-savings";
     const BUY_MORE_RE = /Buy\s+\d+\s+or more/i;
 
@@ -26,12 +17,9 @@
         return isNaN(num) ? 0 : num;
     }
 
-    function getPriceContainer() {
-        const offers = document.querySelector("#product-page-offers");
-        const titleEl = offers
-            ? [...offers.querySelectorAll("div")].find((el) => el.children.length === 0 && el.textContent.trim().replace(/\.$/, "") === "Price/Ea")
-            : null;
-        return titleEl ? titleEl.parentElement : null;
+    function getPriceContainers() {
+        const titleEls = [...document.querySelectorAll("div")].filter((el) => el.children.length === 0 && el.textContent.trim().replace(/\.$/, "") === "Price/Ea");
+        return titleEls.map((el) => el.parentElement).filter(Boolean);
     }
 
     function addSavingsNote(p, basePrice) {
@@ -48,32 +36,35 @@
     }
 
     function applySavings() {
-        const container = getPriceContainer();
-        const baseEl = container && (container.querySelector("#price-block .current-price") || container.querySelector(".current-price"));
-        const breaks = container ? container.querySelectorAll(".price-breaks p") : [];
-        const basePrice = baseEl ? parsePrice(baseEl.textContent) : 0;
+        const containers = getPriceContainers();
 
-        if (basePrice && breaks.length) {
-            container.querySelectorAll(".AB-savings-text").forEach((el) => el.remove());
-            breaks.forEach((p) => addSavingsNote(p, basePrice));
-        }
+        containers.forEach((container) => {
+            const baseEl = container.querySelector("#price-block .current-price") || container.querySelector(".current-price");
+            const breaks = container.querySelectorAll(".price-breaks p");
+            const basePrice = baseEl ? parsePrice(baseEl.textContent) : 0;
+
+            if (basePrice && breaks.length) {
+                container.querySelectorAll(".AB-savings-text").forEach((el) => el.remove());
+                breaks.forEach((p) => addSavingsNote(p, basePrice));
+            }
+        });
     }
 
-    function safeApply(root) {
+    function safeApply(roots) {
         if (contentObserver) contentObserver.disconnect();
         applySavings();
-        if (contentObserver && root) {
-            contentObserver.observe(root, { childList: true, subtree: true, characterData: true });
+        if (contentObserver && roots) {
+            roots.forEach((root) => contentObserver.observe(root, { childList: true, subtree: true, characterData: true }));
         }
     }
 
     function init() {
-        const offers = document.querySelector("#product-page-offers");
+        const containers = getPriceContainers();
 
-        if (offers) {
+        if (containers.length) {
             document.body.classList.contains(BODY_CLASS) || document.body.classList.add(BODY_CLASS);
 
-            const run = debounce(() => safeApply(offers), 60);
+            const run = debounce(() => safeApply(getPriceContainers()), 60);
 
             const grid = document.querySelector("#products-grid");
             if (grid) {
@@ -83,10 +74,20 @@
                 });
             }
 
-            contentObserver = new MutationObserver(run);
-            contentObserver.observe(offers, { childList: true, subtree: true, characterData: true });
+            const qtyArea = document.querySelector(".add-to-cart-area") || document.querySelector("#add-to-cart-area");
+            if (qtyArea) {
+                new MutationObserver(run).observe(qtyArea, {
+                    childList: true,
+                    subtree: true,
+                    characterData: true,
+                    attributes: true,
+                });
+            }
 
-            safeApply(offers);
+            contentObserver = new MutationObserver(run);
+            containers.forEach((container) => contentObserver.observe(container, { childList: true, subtree: true, characterData: true }));
+
+            safeApply(containers);
         }
     }
 
