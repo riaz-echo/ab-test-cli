@@ -3,6 +3,7 @@
     const BUY_MORE_RE = /Buy\s+\d+\s+or more/i;
 
     let contentObserver = null;
+    const basePriceCache = new Map();
 
     function debounce(fn, wait) {
         let t;
@@ -15,6 +16,18 @@
     function parsePrice(str) {
         const num = parseFloat(String(str).replace(/[^0-9.]/g, ""));
         return isNaN(num) ? 0 : num;
+    }
+
+    function getBasePrice(baseEl) {
+        const key = baseEl.id || "default";
+        const current = parsePrice(baseEl.textContent);
+        const stored = basePriceCache.get(key) || 0;
+
+        if (current > stored) {
+            basePriceCache.set(key, current);
+        }
+
+        return basePriceCache.get(key);
     }
 
     function getPriceContainers() {
@@ -41,7 +54,7 @@
         containers.forEach((container) => {
             const baseEl = container.querySelector("#price-block .current-price") || container.querySelector(".current-price");
             const breaks = container.querySelectorAll(".price-breaks p");
-            const basePrice = baseEl ? parsePrice(baseEl.textContent) : 0;
+            const basePrice = baseEl ? getBasePrice(baseEl) : 0;
 
             if (basePrice && breaks.length) {
                 container.querySelectorAll(".AB-savings-text").forEach((el) => el.remove());
@@ -54,7 +67,7 @@
         if (contentObserver) contentObserver.disconnect();
         applySavings();
         if (contentObserver && roots) {
-            roots.forEach((root) => contentObserver.observe(root, { childList: true, subtree: true, characterData: true }));
+            roots.forEach((root) => contentObserver.observe(root, {childList: true, subtree: true, characterData: true}));
         }
     }
 
@@ -74,18 +87,8 @@
                 });
             }
 
-            const qtyArea = document.querySelector(".add-to-cart-area") || document.querySelector("#add-to-cart-area");
-            if (qtyArea) {
-                new MutationObserver(run).observe(qtyArea, {
-                    childList: true,
-                    subtree: true,
-                    characterData: true,
-                    attributes: true,
-                });
-            }
-
             contentObserver = new MutationObserver(run);
-            containers.forEach((container) => contentObserver.observe(container, { childList: true, subtree: true, characterData: true }));
+            containers.forEach((container) => contentObserver.observe(container, {childList: true, subtree: true, characterData: true}));
 
             safeApply(containers);
         }
