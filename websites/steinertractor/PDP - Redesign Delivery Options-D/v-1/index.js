@@ -1,12 +1,6 @@
 (() => {
     const TEST_ID = "PDP_DELIVERY_OPTIONS";
-    const VERSION = "v-01";
     const BODY_CLASS = `AB--${TEST_ID}`;
-    
-    function logInfo(message) {
-        console.log(`%cROI%c${TEST_ID}-${VERSION}`, "color:white;background:rgb(0,0,57);font-weight:700;padding:2px 4px;", "margin-left:8px;color:white;background:rgb(0,57,57);font-weight:700;padding:2px 4px;", message);
-    }
-    logInfo("fired");
 
     function waitForElem(waitFor, callback, minElements = 1, isVariable = false, timer = 10000, frequency = 25) {
         let elements = isVariable ? window[waitFor] : document.querySelectorAll(waitFor);

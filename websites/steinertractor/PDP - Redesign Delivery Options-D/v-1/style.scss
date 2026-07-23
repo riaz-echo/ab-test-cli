@@ -1,4 +1,8 @@
 body.AB--PDP_DELIVERY_OPTIONS {
+    product-detail-root #shop section.single_product_details_area #mob_pad > .row:has(app-thumbnails) > div:has(.single_product_desc) .single_product_desc > .row > div:has(#productCode) > div:has(eve-add-to-cart) > div:has(eve-add-to-cart) eve-add-to-cart + button {
+        margin-bottom: 29px !important;
+    }
+
     .single_product_details_area .single_product_desc eve-delivery-icons {
         .w-100.h-10 {
             display: none !important;
@@ -31,7 +35,7 @@ body.AB--PDP_DELIVERY_OPTIONS {
     .AB--delivery__item {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 10px;
         padding: 8px 0px;
         margin: 0;
 

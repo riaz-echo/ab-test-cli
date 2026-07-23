@@ -2,8 +2,11 @@
     const TEST_ID = "PDP_DELIVERY_OPTIONS";
     const VERSION = "v-01";
     const BODY_CLASS = `AB--${TEST_ID}`;
-
-    console.log(`%c${TEST_ID} - ${VERSION}`, "background: black;border: 2px solid green;color: white;display: block;text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);text-align: center;font-weight: bold;padding : 10px;margin : 10px");
+    
+    function logInfo(message) {
+        console.log(`%cROI%c${TEST_ID}-${VERSION}`, "color:white;background:rgb(0,0,57);font-weight:700;padding:2px 4px;", "margin-left:8px;color:white;background:rgb(0,57,57);font-weight:700;padding:2px 4px;", message);
+    }
+    logInfo("fired");
 
     function waitForElem(waitFor, callback, minElements = 1, isVariable = false, timer = 10000, frequency = 25) {
         let elements = isVariable ? window[waitFor] : document.querySelectorAll(waitFor);
@@ -38,18 +41,8 @@
     const CONTAINER = ".single_product_details_area .single_product_desc eve-delivery-icons";
     const OLD_ICONS = `${CONTAINER} img.delivery-icon`;
 
-    function skeletonMarkup() {
-        const rows = DELIVERY_OPTIONS.map(() => `
-            <li class="AB--delivery__item">
-                <span class="AB--delivery__icon AB--delivery__sk"></span>
-                <span class="AB--delivery__sk AB--delivery__sk-line"></span>
-                <span class="AB--delivery__sk AB--delivery__sk-eta"></span>
-            </li>`).join("");
-        return `
-        <div class="AB--delivery__wrap AB--delivery__skeleton">
-            <div class="AB--delivery__title AB--delivery__sk AB--delivery__sk-title"></div>
-            <ul class="AB--delivery__list">${rows}</ul>
-        </div>`;
+    function loaderMarkup() {
+        return `<div class="AB--delivery__loader"><span class="AB--delivery__spinner"></span></div>`;
     }
 
     function deliveryMarkup(states) {
@@ -72,7 +65,7 @@
         waitForElem(CONTAINER, ([root]) => {
             if (root.querySelector(".AB--delivery__wrap")) return;
 
-            root.insertAdjacentHTML("beforeend", skeletonMarkup());
+            root.insertAdjacentHTML("beforeend", loaderMarkup());
 
             waitForElem(OLD_ICONS, (imgs) => {
                 const oldIcons = [...imgs];
@@ -82,7 +75,7 @@
                 });
 
                 requestAnimationFrame(() => {
-                    root.querySelector(".AB--delivery__skeleton")?.remove();
+                    root.querySelector(".AB--delivery__loader")?.remove();
                     root.insertAdjacentHTML("beforeend", deliveryMarkup(states));
                 });
             }, DELIVERY_OPTIONS.length);
