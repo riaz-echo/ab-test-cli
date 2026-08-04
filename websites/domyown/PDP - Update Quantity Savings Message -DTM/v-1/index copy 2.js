@@ -1,9 +1,6 @@
 (() => {
     const BODY_CLASS = "AB-pdp-qty-savings";
     const BUY_MORE_RE = /Buy\s+\d+\s+or more/i;
-    const STABLE_CHECK_DELAY = 150;
-    const FORCE_MIN_WAIT = 500;
-    const MAX_WAIT = 1200; 
 
     let contentObserver = null;
     const basePriceCache = new Map();
@@ -14,47 +11,6 @@
             clearTimeout(t);
             t = setTimeout(fn, wait);
         };
-    }
-
-    function snapshotContainers(containers) {
-        return containers
-            .map((container) => {
-                const baseEl = container.querySelector("#price-block .current-price") || container.querySelector(".current-price");
-                const breaksText = [...container.querySelectorAll(".price-breaks p")].map((p) => p.textContent.trim()).join("|");
-                return `${baseEl ? baseEl.textContent.trim() : ""}::${breaksText}`;
-            })
-            .join("~~");
-    }
-
-    function sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-
-    let stabilizing = false;
-
-    async function waitUntilStable(getContainers, onStable) {
-        if (stabilizing) return;
-        stabilizing = true;
-
-        const startedAt = Date.now();
-        let lastSnapshot = snapshotContainers(getContainers());
-
-        while (true) {
-            await sleep(STABLE_CHECK_DELAY);
-
-            const containers = getContainers();
-            const snapshot = snapshotContainers(containers);
-            const elapsed = Date.now() - startedAt;
-            const settled = snapshot === lastSnapshot && elapsed >= FORCE_MIN_WAIT;
-
-            if (settled || elapsed >= MAX_WAIT) {
-                stabilizing = false;
-                onStable(containers);
-                return;
-            }
-
-            lastSnapshot = snapshot;
-        }
     }
 
     function parsePrice(str) {
@@ -92,6 +48,8 @@
         }
     }
 
+    
+
     function applySavings() {
         const containers = getPriceContainers();
 
@@ -121,7 +79,7 @@
         if (containers.length) {
             document.body.classList.contains(BODY_CLASS) || document.body.classList.add(BODY_CLASS);
 
-            const run = debounce(() => waitUntilStable(getPriceContainers, safeApply), 60);
+            const run = debounce(() => safeApply(getPriceContainers()), 300);
 
             const grid = document.querySelector("#products-grid");
             if (grid) {
@@ -130,10 +88,9 @@
                     attributeFilter: ["data-selected-products-id"],
                 });
             }
-
+            
             contentObserver = new MutationObserver(run);
             containers.forEach((container) => contentObserver.observe(container, {childList: true, subtree: true, characterData: true}));
-
             safeApply(containers);
         }
     }
