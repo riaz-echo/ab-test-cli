@@ -16,7 +16,7 @@ body.AB--PDP_DELIVERY_OPTIONS {
     }
 
     .AB--delivery__title {
-        font-family: Inter;
+        font-family: inherit;
         font-size: 16px;
         font-weight: 800;
         letter-spacing: 0%;
@@ -74,7 +74,7 @@ body.AB--PDP_DELIVERY_OPTIONS {
 
     .AB--delivery__label {
         flex: 1 1 auto;
-        font-family: Inter;
+        font-family: inherit;
         font-size: 16px;
         font-weight: 700;
         color: #212529;
@@ -83,7 +83,7 @@ body.AB--PDP_DELIVERY_OPTIONS {
     }
 
     .AB--delivery__eta {
-        font-family: Inter;
+        font-family: inherit;
         flex-shrink: 0;
         font-size: 14px;
         font-weight: 600;
@@ -111,7 +111,7 @@ body.AB--PDP_DELIVERY_OPTIONS {
 
         .AB--delivery__label,
         .AB--delivery__eta {
-            font-family: Inter !important;
+            font-family: inherit !important;
             color: #939393 !important;
         }
     }
