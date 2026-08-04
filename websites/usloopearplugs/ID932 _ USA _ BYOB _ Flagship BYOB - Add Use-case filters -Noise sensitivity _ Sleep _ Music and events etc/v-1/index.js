@@ -68,8 +68,10 @@
         const items = useCaseObj[activeUseCase]?.items;
 
         document.querySelectorAll(`.byob .${AB}-card`).forEach((card) => {
-            const visible = !items || items.includes(card.dataset.abHandle);
+            const index = items ? items.indexOf(card.dataset.abHandle) : -1;
+            const visible = !items || index !== -1;
             card.classList.toggle(`${AB}-card--hidden`, !visible);
+            card.style.order = items && visible ? index : "";
         });
 
         document.querySelectorAll(".byob .byob-products__collection").forEach((collection) => {

@@ -2,71 +2,76 @@ $AB: "AB-ID932";
 
 $ab-gutter: 1rem;
 
+body.#{$AB} .byob-tiers {
+    margin-bottom: calc(var(--spacing) * 5);
+}
+
 .#{$AB}-section {
-  border-top: 1px solid #d5d5d5;
-  margin-right: $ab-gutter;
-  grid-column: 1 / -1;
-  order: -1;
+    border-top: 1px solid #d5d5d5;
+    grid-column: 1 / -1;
+    order: -1;
 }
 
 .#{$AB}-filters {
-  margin-right: -$ab-gutter;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 0.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: $ab-gutter;
-  padding: 20px 0;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    margin-right: -$ab-gutter;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: $ab-gutter;
+    padding: 20px $ab-gutter 20px 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
-  @media (min-width: 768px) {
-    gap: 1rem;
-  }
+    @media (min-width: 768px) {
+        gap: 1rem;
+    }
 }
 
 .#{$AB}-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  appearance: none;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  background-color: #ffffff;
-  border: 0.0625rem solid #252427;
-  color: #252427;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    appearance: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    border: 0.0625rem solid #252427;
+    color: #252427;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    white-space: nowrap;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
 
-  &[aria-checked="true"] {
-    background-color: #252427;
-    border-color: #252427;
-    color: #ffffff;
+    &[aria-checked="true"] {
+        background-color: #252427;
+        border-color: #252427;
+        color: #ffffff;
 
-    .#{$AB}-chip__icon {
-      filter: invert(1);
+        .#{$AB}-chip__icon {
+            filter: invert(1);
+        }
     }
-  }
 }
 
 .#{$AB}-chip__icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
 }
 
 .#{$AB}-card--hidden,
 .#{$AB}-collection--hidden {
-  display: none !important;
+    display: none !important;
 }
