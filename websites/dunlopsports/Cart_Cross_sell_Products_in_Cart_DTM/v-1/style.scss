@@ -1,0 +1,146 @@
+body.ab--cart-cross-sell {
+    .ab--cross-sell {
+        width: max-content;
+        margin: 10px 0 30px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .ab--cross-sell-title {
+        margin: 0 0 20px;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #000;
+    }
+
+    .ab--product-slider {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+
+    .ab--product-card {
+        width: 100%;
+        max-width: 185px;
+    }
+
+    .ab--product-image {
+        display: block;
+        text-align: center;
+        margin-bottom: 12px;
+
+        img {
+            width: 170px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+
+    .ab--product-title {
+        margin: 0 0 6px;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.35;
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+    }
+
+    .ab--product-price {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .ab--product-rating {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: #444;
+        margin-bottom: 14px;
+    }
+
+    .ab--stars {
+        color: #000;
+        white-space: nowrap;
+    }
+
+    .ab--rating {
+        font-weight: 600;
+    }
+
+    .ab--reviews {
+        color: #666;
+    }
+
+    .ab--add-to-cart {
+        width: 100%;
+        background: #000;
+        color: #fff;
+        border: 0;
+        padding: 14px 0;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+
+        &:hover {
+            background: #222;
+        }
+
+        &:disabled,
+        &.ab--is-loading {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #000;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .ab--cross-sell {
+            width: 100%;
+        }
+
+        .ab--cross-sell-title {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .ab--product-slider {
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 16px;
+            padding-bottom: 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .ab--product-card {
+            flex: 0 0 150px;
+            max-width: none;
+            scroll-snap-align: start;
+        }
+
+        .ab--product-image img {
+            width: 100%;
+        }
+
+        .ab--product-price {
+            font-size: 18px;
+        }
+
+        .ab--add-to-cart {
+            padding: 12px 0;
+            font-size: 12px;
+        }
+    }
+}

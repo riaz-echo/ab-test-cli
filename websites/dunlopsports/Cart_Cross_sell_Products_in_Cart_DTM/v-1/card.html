@@ -1,0 +1,201 @@
+/**HTML**/
+
+<div class="product-grid product-slider">
+
+  <div class="product-card">
+    <a href="#" class="product-image">
+      <img src="https://placehold.co/250x250?text=Z-STAR" alt="Z-STAR Golf Balls - Pure White">
+    </a>
+
+    <h3 class="product-title">
+      <a href="#">Z-STAR Golf Balls - Pure White</a>
+    </h3>
+
+    <div class="product-price">$54.99</div>
+
+    <div class="product-rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating">4.8</span>
+      <span class="reviews">129 Reviews</span>
+    </div>
+
+    <button class="add-to-cart">ADD TO CART</button>
+  </div>
+
+  <div class="product-card">
+    <a href="#" class="product-image">
+      <img src="https://placehold.co/250x250?text=Q-STAR+TOUR" alt="Q-STAR TOUR Golf Balls - Pure White">
+    </a>
+
+    <h3 class="product-title">
+      <a href="#">Q-STAR TOUR Golf Balls - Pure White</a>
+    </h3>
+
+    <div class="product-price">$39.99</div>
+
+    <div class="product-rating">
+      <span class="stars">★★★★★</span>
+      <span class="rating">4.9</span>
+      <span class="reviews">82 Reviews</span>
+    </div>
+
+    <button class="add-to-cart">ADD TO CART</button>
+  </div>
+
+  <div class="product-card">
+    <a href="#" class="product-image">
+      <img src="https://placehold.co/250x250?text=SOFT+FEEL" alt="SOFT FEEL Golf Balls - Soft White">
+    </a>
+
+    <h3 class="product-title">
+      <a href="#">SOFT FEEL Golf Balls - Soft White</a>
+    </h3>
+
+    <div class="product-price">$24.99</div>
+
+    <div class="product-rating">
+      <span class="stars">★★★★☆</span>
+      <span class="rating">4.5</span>
+      <span class="reviews">111 Reviews</span>
+    </div>
+
+    <button class="add-to-cart">ADD TO CART</button>
+  </div>
+
+</div>
+
+/**CSS**/
+.product-slider {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.product-card {
+    width: 100%;
+    max-width: 185px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.product-image {
+    display: block;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.product-image img {
+    width: 170px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.product-title {
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.35;
+}
+
+.product-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.product-price {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #444;
+    margin-bottom: 14px;
+}
+
+.stars {
+    color: #000;
+}
+
+.rating {
+    font-weight: 600;
+}
+
+.reviews {
+    color: #666;
+}
+
+.add-to-cart {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: 0;
+    padding: 14px 0;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.add-to-cart:hover {
+    background: #222;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+
+    .product-slider {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 16px;
+        padding-bottom: 12px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .product-slider::-webkit-scrollbar {
+        display: none;
+    }
+
+    .product-card {
+        flex: 0 0 185px;
+        max-width: none;
+        scroll-snap-align: start;
+    }
+}
+
+<!-- Data -->
+ var crossSellProducts = [
+    {
+        image: "https://us.dunlopsports.com/on/demandware.static/-/Sites-masterCatalog_DunlopSports/default/dwaca1a630/images/large/SX25-Balls-ZSTR9-DIAMOND3-Pure-White-2.jpg",
+        name: "Z-STAR DIAMOND Golf Balls - Pure White",
+        price: "$54.99",
+        star_review: "4.9",
+        review_count: "143",
+        SKU: "10360244",
+        " url": "https://us.dunlopsports.com/srixon/jj-spauns-witb/z-star-diamond-golf-balls/10360244.html",
+    },
+    {
+        image: "https://us.dunlopsports.com/on/demandware.static/-/Sites-masterCatalog_DunlopSports/default/dw7d157c49/images/large/QSTR-TOUR-6_Pkg_White_FLIP.jpg",
+        name: "Q-STAR TOUR Golf Balls - Pure White",
+        price: "$39.99",
+        star_review: "4.9",
+        review_count: "83",
+        SKU: "10369840",
+        " url": "https://us.dunlopsports.com/srixon/balls/q-star-series/q-star-tour/q-star-tour-golf-balls/10369840.html",
+    },
+    {
+        image: "https://us.dunlopsports.com/on/demandware.static/-/Sites-masterCatalog_DunlopSports/default/dw1779566b/images/large/SX25-Balls-SF14-Soft-White-1.jpg",
+        name: "SOFT FEEL Golf Balls - Soft White",
+        price: "$24.99",
+        star_review: "4.5",
+        review_count: "111",
+        SKU: "10352300",
+        url: "https://us.dunlopsports.com/srixon/balls/soft-feel-series/soft-feel/soft-feel-golf-balls/10352300.html",
+    },
+];

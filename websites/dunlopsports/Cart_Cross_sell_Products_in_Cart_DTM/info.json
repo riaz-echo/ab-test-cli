@@ -1,0 +1,13 @@
+{
+  "id": "1786012844352_2887_Cart_Cross_sell_Products_in_Cart_DTM",
+  "name": "Cart_Cross_sell_Products_in_Cart_DTM",
+  "type": "A/B",
+  "website": "dunlopsports",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-08-06T10:40:44.352Z",
+  "createdAtReadable": "8/6/2026, 4:40:44 PM",
+  "lastUpdated": "2026-08-06T10:40:44.524Z"
+}
