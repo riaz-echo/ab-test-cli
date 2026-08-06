@@ -1,0 +1,132 @@
+body.ab--pdp-gallery-move {
+    .left-side-blocks {
+        .splitZoneBox {
+            .custphototile {
+                display: none !important;
+            }
+            .zoneBox {
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: 1 1 100% !important;
+
+                .prodzonecontainer {
+                    display: flex !important;
+                    align-items: center;
+                    flex-wrap: nowrap;
+                    gap: 20px;
+                }
+                .zonelocation {
+                    flex: 0 0 auto;
+                    float: none !important;
+                    margin: 0 !important;
+                }
+                .zoneinfoleft {
+                    flex: 1 1 auto;
+                    min-width: 0;
+                    margin-left: 0 !important;
+                    padding-left: 0 !important;
+                }
+            }
+        }
+    }
+
+    #rowgallery {
+        opacity: 0 !important;
+        height: 0 !important;
+        pointer-events: none;
+    }
+    &.ab--gallery-fallback #rowgallery,
+    #rowgallery.ab--gallery-moved {
+        opacity: 1 !important;
+        height: auto !important;
+        pointer-events: auto;
+    }
+    .ab--gallery-section {
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+    #rowgallery.ab--gallery-moved {
+        .yotpo-pictures-gallery-header-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .yotpo-slider-title-wrapper {
+            display: none;
+        }
+        .ab--gallery-title {
+            flex: 0 1 auto;
+            margin: 0;
+        }
+        .yotpo-pictures-gallery-upload-button-wrapper {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0;
+        }
+
+        @media (max-width: 1200px) {
+            .yotpo-pictures-gallery-header-wrapper {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .yotpo-pictures-gallery-upload-button-wrapper {
+                position: static;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            margin: 20px auto;
+            .ab--gallery-title {
+                white-space: nowrap;
+            }
+            .yotpo-display-wrapper.yotpo-slider {
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+            }
+            .yotpo-display-wrapper.yotpo-slider > [class*="arrow"],
+            .yotpo-display-wrapper.yotpo-slider > [class*="nav"],
+            .yotpo-display-wrapper.yotpo-slider > [class*="y-prev"],
+            .yotpo-display-wrapper.yotpo-slider > [class*="y-next"],
+            .yotpo-slider-wrapper > [class*="arrow"],
+            .yotpo-slider-wrapper > [class*="nav"],
+            .yotpo-slider-wrapper > [class*="y-prev"],
+            .yotpo-slider-wrapper > [class*="y-next"] {
+                display: none !important;
+            }
+            .y-slider-container {
+                display: flex;
+                gap: 8px;
+                width: max-content !important;
+                left: 0 !important;
+                transform: none !important;
+            }
+            .yotpo-single-image-container {
+                flex: 0 0 auto;
+                width: 42vw !important;
+                min-width: 150px;
+                scroll-snap-align: start;
+            }
+            .yotpo-image {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+        }
+
+        // Very small phones: the nowrap title overflows at the theme size, so scale it
+        // with the viewport. Placed after the 767px block so it wins on source order.
+        @media (max-width: 389px) {
+            .ab--gallery-title {
+                font-size: clamp(16px, 5.3vw, 22px);
+            }
+        }
+    }
+}

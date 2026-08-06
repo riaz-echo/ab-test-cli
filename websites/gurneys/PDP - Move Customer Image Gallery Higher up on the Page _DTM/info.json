@@ -1,0 +1,13 @@
+{
+  "id": "1785821119667_8866_PDP___Move_Customer_Image_Gallery_Higher_up_on_the_Page__DTM",
+  "name": "PDP - Move Customer Image Gallery Higher up on the Page _DTM",
+  "type": "A/B",
+  "website": "gurneys",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-08-04T05:25:19.667Z",
+  "createdAtReadable": "8/4/2026, 11:25:19 AM",
+  "lastUpdated": "2026-08-04T05:25:20.077Z"
+}
