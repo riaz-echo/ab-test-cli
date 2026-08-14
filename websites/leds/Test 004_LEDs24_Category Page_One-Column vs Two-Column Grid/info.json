@@ -1,0 +1,13 @@
+{
+  "id": "1786520095272_748_Test_004_LEDs24_Category_Page_One_Column_vs_Two_Column_Grid",
+  "name": "Test 004_LEDs24_Category Page_One-Column vs Two-Column Grid",
+  "type": "A/B",
+  "website": "leds",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-08-12T07:34:55.272Z",
+  "createdAtReadable": "8/12/2026, 1:34:55 PM",
+  "lastUpdated": "2026-08-12T07:34:55.372Z"
+}
