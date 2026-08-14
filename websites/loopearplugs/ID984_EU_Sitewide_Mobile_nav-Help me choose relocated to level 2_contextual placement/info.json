@@ -1,0 +1,13 @@
+{
+  "id": "1786358144887_6622_ID984_EU_Sitewide_Mobile_nav_Help_me_choose_relocated_to_level_2_contextual_placement",
+  "name": "ID984_EU_Sitewide_Mobile_nav-Help me choose relocated to level 2_contextual placement",
+  "type": "A/B",
+  "website": "loopearplugs",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-08-10T10:35:44.887Z",
+  "createdAtReadable": "8/10/2026, 4:35:44 PM",
+  "lastUpdated": "2026-08-10T10:35:45.060Z"
+}

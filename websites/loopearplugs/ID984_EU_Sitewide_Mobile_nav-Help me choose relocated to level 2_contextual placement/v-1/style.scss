@@ -1,0 +1,24 @@
+$AB: "AB-ID984";
+
+body.#{$AB} .#{$AB}-original-hidden {
+    display: none !important;
+}
+body.#{$AB} a.border[href*="accessories"] {
+ border: none !important;
+}
+body.#{$AB} .#{$AB}-list {
+    margin-top: auto;
+    flex: 0 0 auto;
+    overflow: visible;
+}
+body.#{$AB} .#{$AB}-item {
+    list-style: none;
+}
+body.#{$AB} .#{$AB}-trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+}

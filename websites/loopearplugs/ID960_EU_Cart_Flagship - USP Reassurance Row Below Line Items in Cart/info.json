@@ -1,0 +1,13 @@
+{
+  "id": "1786020982374_2105_ID960_EU_Cart_Flagship___USP_Reassurance_Row_Below_Line_Items_in_Cart",
+  "name": "ID960_EU_Cart_Flagship - USP Reassurance Row Below Line Items in Cart",
+  "type": "A/B",
+  "website": "loopearplugs",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-08-06T12:56:22.374Z",
+  "createdAtReadable": "8/6/2026, 6:56:22 PM",
+  "lastUpdated": "2026-08-06T12:56:22.476Z"
+}
