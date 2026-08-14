@@ -1,5 +1,3 @@
-import testInfo from "./info.json" assert { type: "json" };
-
 (() => {
     const BODY_CLASS = "ab--cart-cross-sell";
     const SECTION_CLASS = "ab--cross-sell";
@@ -43,7 +41,6 @@ import testInfo from "./info.json" assert { type: "json" };
         (!isVariable && elements.length >= minElements) || (isVariable && typeof window[waitFor] !== "undefined") ? callback(elements) : setTimeout(() => waitForElem(waitFor, callback, minElements, isVariable, timer - frequency, frequency, onTimeout), frequency);
     }
 
-    // Matches the client mock: 4.8 and 4.9 render five filled stars, 4.5 renders four.
     function buildStars(rating) {
         const value = parseFloat(rating) || 0;
         let stars = "";
@@ -111,7 +108,6 @@ import testInfo from "./info.json" assert { type: "json" };
             .then((data) => {
                 if (data && data.error) throw new Error(data.message || "add to cart failed");
                 button.textContent = "ADDED";
-                // The cart page totals/line items are server rendered, so reload to reflect the new item.
                 window.location.reload();
             })
             .catch(() => {

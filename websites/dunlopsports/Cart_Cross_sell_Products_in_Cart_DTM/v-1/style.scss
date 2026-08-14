@@ -7,10 +7,10 @@ body.ab--cart-cross-sell {
 
     .ab--cross-sell-title {
         margin: 0 0 20px;
-        font-size: 20px;
+        font-size: 24px;
         font-weight: 700;
-        line-height: 1.2;
-        color: #000;
+        line-height: 28.8px;
+        color: #222222;
     }
 
     .ab--product-slider {
@@ -39,9 +39,10 @@ body.ab--cart-cross-sell {
 
     .ab--product-title {
         margin: 0 0 6px;
+        font-family: Jaggar;
         font-size: 13px;
         font-weight: 400;
-        line-height: 1.35;
+        line-height: 17.55px;
 
         a {
             color: #333;
@@ -52,6 +53,7 @@ body.ab--cart-cross-sell {
     .ab--product-price {
         font-size: 22px;
         font-weight: 700;
+        line-height: 33px;
         margin-bottom: 8px;
     }
 
@@ -70,11 +72,14 @@ body.ab--cart-cross-sell {
     }
 
     .ab--rating {
-        font-weight: 600;
+        font-weight: 700;
+        line-height: 18px;
     }
 
     .ab--reviews {
         color: #666;
+        line-height: 18px;
+        font-weight: 400;
     }
 
     .ab--add-to-cart {
@@ -83,6 +88,8 @@ body.ab--cart-cross-sell {
         color: #fff;
         border: 0;
         padding: 14px 0;
+        line-height: 19.5px;
+        letter-spacing: 0.5px;
         font-size: 13px;
         font-weight: 700;
         cursor: pointer;
@@ -99,7 +106,7 @@ body.ab--cart-cross-sell {
         }
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: 767px) {
         .ab--cross-sell {
             width: 100%;
         }
