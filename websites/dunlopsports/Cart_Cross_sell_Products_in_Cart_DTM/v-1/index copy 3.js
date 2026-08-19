@@ -5,6 +5,12 @@
     const CART_CONTAINER = ".cart.cart-page";
     const SECTION_TITLE = "Gear Up for Your Next Round";
     const ADD_TO_CART_ACTION = "/on/demandware.store/Sites-DunlopSportsUS-Site/en_US/Cart-AddProduct";
+    const CART_URL = "/cart";
+    const MINI_CART_URL = "/on/demandware.store/Sites-DunlopSportsUS-Site/en_US/Cart-MiniCartShow";
+    const MINI_CART_POPOVER = "#miniCartPopover";
+    const MINI_CART_COUNT = ".minicart-quantity";
+    const TOTALS_SELECTORS = [".grand-total", ".shipping-cost", ".tax-total", ".order-discount-total", ".shipping-discount-total"];
+    const DISCOUNT_ROWS = [".order-discount", ".shipping-discount"];
     const SCROLL_FLAG = "ab--cross-sell-scroll-top";
     const READY_CLASS = "ab--is-ready";
 
@@ -46,28 +52,103 @@
         (!isVariable && elements.length >= minElements) || (isVariable && typeof window[waitFor] !== "undefined") ? callback(elements) : setTimeout(() => waitForElem(waitFor, callback, minElements, isVariable, timer - frequency, frequency, onTimeout), frequency);
     }
 
-    function scrollToTopThenReload() {
+    function scrollToTopAfterReload() {
         sessionStorage.setItem(SCROLL_FLAG, "1");
         window.history.scrollRestoration = "manual";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-
-        let frames = 0;
-        const whenLanded = () => {
-            if (window.scrollY === 0 || (frames += 1) > 120) return window.location.reload();
-            requestAnimationFrame(whenLanded);
-        };
-        requestAnimationFrame(whenLanded);
     }
 
     function restoreScrollPosition() {
         if (sessionStorage.getItem(SCROLL_FLAG) !== "1") return;
         sessionStorage.removeItem(SCROLL_FLAG);
 
-        window.scrollTo(0, 0);
-        window.addEventListener("load", () => {
-            window.scrollTo(0, 0);
-            window.history.scrollRestoration = "auto";
-        }, { once: true });
+        window.history.scrollRestoration = "manual";
+
+        const toTop = () => window.scrollTo(0, 0);
+        toTop();
+        window.addEventListener("load", () => requestAnimationFrame(toTop), { once: true });
+    }
+
+    function renderCart() {
+        return fetch(CART_URL, {
+            credentials: "include",
+            headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error(response.status);
+                return response.text();
+            })
+            .then((html) => {
+                const doc = new DOMParser().parseFromString(html, "text/html");
+                const freshCards = doc.querySelectorAll(ANCHOR);
+                const cards = document.querySelectorAll(ANCHOR);
+                if (!freshCards.length || !cards.length) throw new Error("cart markup missing");
+
+                cards[0].parentElement.innerHTML = freshCards[0].parentElement.innerHTML;
+                return doc;
+            });
+    }
+
+    function updateTotals(doc) {
+        TOTALS_SELECTORS.forEach((selector) => {
+            const fresh = doc.querySelector(selector);
+            const current = document.querySelector(selector);
+            if (fresh && current) current.textContent = fresh.textContent;
+        });
+
+        DISCOUNT_ROWS.forEach((selector) => {
+            const fresh = doc.querySelector(selector);
+            const current = document.querySelector(selector);
+            if (fresh && current) current.className = fresh.className;
+        });
+
+        const freshPromos = doc.querySelector(".coupons-and-promos");
+        const promos = document.querySelector(".coupons-and-promos");
+        if (freshPromos && promos) promos.innerHTML = freshPromos.innerHTML;
+
+        const freshKlarna = doc.querySelector("klarna-placement[data-purchase-amount]");
+        const klarna = document.querySelector("klarna-placement[data-purchase-amount]");
+        if (freshKlarna && klarna) klarna.setAttribute("data-purchase-amount", freshKlarna.getAttribute("data-purchase-amount"));
+        if (window.Klarna && window.Klarna.OnsiteMessaging) window.Klarna.OnsiteMessaging.refresh();
+    }
+
+    // The count in the navbar is only half the mini cart: the popover keeps the line items the
+    // theme rendered on page load, so it has to be refilled or it still shows the old basket.
+    function updateMiniCart(doc) {
+        const popover = document.querySelector(MINI_CART_POPOVER);
+        if (!popover) return Promise.resolve();
+
+        const freshCount = doc.querySelector(MINI_CART_COUNT);
+        const count = document.querySelector(MINI_CART_COUNT);
+        if (freshCount && count) count.textContent = freshCount.textContent;
+
+        // The cart page we already fetched carries the whole document, popover included.
+        const fresh = doc.querySelector(MINI_CART_POPOVER);
+        if (fresh) {
+            popover.innerHTML = fresh.innerHTML;
+            return Promise.resolve();
+        }
+
+        // Unless the theme injects it only after its own Cart-MiniCartShow call.
+        return fetch(MINI_CART_URL, {
+            credentials: "include",
+            headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error(response.status);
+                return response.text();
+            })
+            .then((html) => {
+                const parsed = new DOMParser().parseFromString(html, "text/html");
+                // The endpoint may answer with the popover itself or with its contents alone.
+                const source = parsed.querySelector(MINI_CART_POPOVER) || parsed.body;
+                popover.innerHTML = source.innerHTML;
+            });
+    }
+
+    function notifyTheme(data) {
+        if (!window.jQuery) return;
+        window.jQuery(".minicart").trigger("count:update", data);
+        window.jQuery("body").trigger("cart:update");
     }
 
     function buildStars(rating) {
@@ -121,6 +202,10 @@
             lineParams: "{}",
         }).toString();
 
+        let added = false;
+        let rendered = false;
+        let cartData = null;
+
         fetch(ADD_TO_CART_ACTION, {
             method: "POST",
             credentials: "include",
@@ -136,10 +221,25 @@
             })
             .then((data) => {
                 if (data && data.error) throw new Error(data.message || "add to cart failed");
+                added = true;
+                cartData = data;
                 button.textContent = "ADDED";
-                scrollToTopThenReload();
+                return renderCart();
             })
-            .catch(() => {
+            .then((doc) => {
+                rendered = true;
+                syncSection();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                updateTotals(doc);
+                notifyTheme(cartData);
+                return updateMiniCart(doc);
+            })
+            .catch((error) => {
+                if (rendered) return console.warn("[ab--cross-sell] cart updated, follow-up failed:", error);
+                if (added) {
+                    scrollToTopAfterReload();
+                    return window.location.reload();
+                }
                 button.disabled = false;
                 button.classList.remove("ab--is-loading");
                 button.textContent = label;

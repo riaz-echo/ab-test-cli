@@ -41,15 +41,6 @@
         conditionMet ? callback(elements) : setTimeout(() => waitForElem(waitFor, callback, minElements, isVariable, timer - frequency), frequency);
     };
 
-    var cssReady = () => getComputedStyle(document.body).getPropertyValue(`--${AB}-css`).trim() === "1";
-
-    var waitForCss = (callback, timer = 5000, frequency = 50) => {
-        if (cssReady() || timer <= 0) return callback();
-        setTimeout(() => waitForCss(callback, timer - frequency, frequency), frequency);
-    };
-
-    let rowEl = null;
-
     function buildRow() {
         const items = Object.entries(uspObj)
             .map(
@@ -73,11 +64,10 @@
         const list = document.querySelector(CART_LIST);
         if (!list) return;
 
-        // Keep the same node across cart re-renders so the SVGs are parsed once.
-        rowEl = rowEl || document.querySelector(`.${AB}-usp`) || buildRow();
+        const row = document.querySelector(`.${AB}-usp`) || buildRow();
 
-        if (list.nextElementSibling !== rowEl) {
-            list.insertAdjacentElement("afterend", rowEl);
+        if (list.nextElementSibling !== row) {
+            list.insertAdjacentElement("afterend", row);
         }
     }
 
@@ -99,10 +89,8 @@
 
     function mainJs() {
         markBody();
-        waitForCss(() => {
-            ensureRow();
-            observeCart();
-        });
+        ensureRow();
+        observeCart();
     }
 
     function onReady(callback) {

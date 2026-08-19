@@ -1,5 +1,11 @@
 $AB: "AB-ID960";
 
+// Sentinel: JS polls this custom property to know the stylesheet has landed
+// before it inserts the row, so the badges never paint unstyled.
+body.#{$AB} {
+    --#{$AB}-css: 1;
+}
+
 body.#{$AB} .#{$AB}-usp {
     display: flex;
     flex-wrap: wrap;
@@ -7,7 +13,7 @@ body.#{$AB} .#{$AB}-usp {
     justify-content: center;
     gap: 18px;
     margin: 0;
-    padding: 1rem;
+    padding: 24px;
     list-style: none;
 }
 
@@ -34,6 +40,7 @@ body.#{$AB} .#{$AB}-usp__label {
     font-family: Avantt;
     font-weight: 600;
     font-size: 12px;
+    color: #252427;
     line-height: 130%;
     letter-spacing: -3%;
 }

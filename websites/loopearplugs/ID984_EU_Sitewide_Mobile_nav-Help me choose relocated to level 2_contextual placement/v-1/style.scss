@@ -1,4 +1,9 @@
 $AB: "AB-ID984";
+$hmc-drawer: "link-group-drawer";
+
+.links_submenu-trigger:has(> button[aria-controls="#{$hmc-drawer}"]) {
+    display: none !important;
+}
 
 body.#{$AB} .#{$AB}-original-hidden {
     display: none !important;

@@ -179,7 +179,6 @@
         hideOriginalHMCBtn();
         addHelpMeChoose();
         bindEvents();
-        console.log("AB-ID984: mainJs");
     }
 
     function onReady(callback) {

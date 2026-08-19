@@ -8,6 +8,7 @@
     const SCROLL_FLAG = "ab--cross-sell-scroll-top";
     const READY_CLASS = "ab--is-ready";
 
+    // The SKUs currently rendered, so cart mutations that change nothing are ignored.
     let renderedSignature = null;
 
     const crossSellProducts = [
@@ -46,28 +47,20 @@
         (!isVariable && elements.length >= minElements) || (isVariable && typeof window[waitFor] !== "undefined") ? callback(elements) : setTimeout(() => waitForElem(waitFor, callback, minElements, isVariable, timer - frequency, frequency, onTimeout), frequency);
     }
 
-    function scrollToTopThenReload() {
+    function scrollToTopAfterReload() {
         sessionStorage.setItem(SCROLL_FLAG, "1");
         window.history.scrollRestoration = "manual";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-
-        let frames = 0;
-        const whenLanded = () => {
-            if (window.scrollY === 0 || (frames += 1) > 120) return window.location.reload();
-            requestAnimationFrame(whenLanded);
-        };
-        requestAnimationFrame(whenLanded);
     }
 
     function restoreScrollPosition() {
         if (sessionStorage.getItem(SCROLL_FLAG) !== "1") return;
         sessionStorage.removeItem(SCROLL_FLAG);
 
-        window.scrollTo(0, 0);
-        window.addEventListener("load", () => {
-            window.scrollTo(0, 0);
-            window.history.scrollRestoration = "auto";
-        }, { once: true });
+        window.history.scrollRestoration = "manual";
+
+        const toTop = () => window.scrollTo(0, 0);
+        toTop();
+        window.addEventListener("load", () => requestAnimationFrame(toTop), { once: true });
     }
 
     function buildStars(rating) {
@@ -137,7 +130,8 @@
             .then((data) => {
                 if (data && data.error) throw new Error(data.message || "add to cart failed");
                 button.textContent = "ADDED";
-                scrollToTopThenReload();
+                scrollToTopAfterReload();
+                window.location.reload();
             })
             .catch(() => {
                 button.disabled = false;
@@ -163,6 +157,8 @@
         return section;
     }
 
+    // Every cart line item carries its product id on the remove button and quantity select, so
+    // the cart contents can be read straight off the DOM regardless of how the item got there.
     function getCartPids() {
         const owned = [...document.querySelectorAll(`${ANCHOR} [data-pid]`)];
         return new Set(owned.map((element) => element.getAttribute("data-pid")));
@@ -173,6 +169,8 @@
         return crossSellProducts.filter((product) => !cartPids.has(product.SKU));
     }
 
+    // Called on load and on every cart mutation. Rebuilding is cheap and keeps the carousel in
+    // step both ways: a ball added anywhere drops out of it, a ball removed comes back.
     function syncSection() {
         const products = getAvailableProducts();
         const signature = products.map((product) => product.SKU).join(",");
@@ -197,6 +195,8 @@
 
         syncSection();
 
+        // Removing a line item re-renders the cart column rather than reloading, so watch it.
+        // Our own inserts land in here too, but syncSection is a no-op when nothing changed.
         new MutationObserver(syncSection).observe(document.querySelector(CART_CONTAINER), { childList: true, subtree: true });
     }
 

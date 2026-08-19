@@ -2,13 +2,10 @@
     const BODY_CLASS = "ab--cart-cross-sell";
     const SECTION_CLASS = "ab--cross-sell";
     const ANCHOR = ".cart.cart-page .row .product-info";
-    const CART_CONTAINER = ".cart.cart-page";
     const SECTION_TITLE = "Gear Up for Your Next Round";
     const ADD_TO_CART_ACTION = "/on/demandware.store/Sites-DunlopSportsUS-Site/en_US/Cart-AddProduct";
     const SCROLL_FLAG = "ab--cross-sell-scroll-top";
     const READY_CLASS = "ab--is-ready";
-
-    let renderedSignature = null;
 
     const crossSellProducts = [
         {
@@ -46,28 +43,20 @@
         (!isVariable && elements.length >= minElements) || (isVariable && typeof window[waitFor] !== "undefined") ? callback(elements) : setTimeout(() => waitForElem(waitFor, callback, minElements, isVariable, timer - frequency, frequency, onTimeout), frequency);
     }
 
-    function scrollToTopThenReload() {
+    function scrollToTopAfterReload() {
         sessionStorage.setItem(SCROLL_FLAG, "1");
         window.history.scrollRestoration = "manual";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-
-        let frames = 0;
-        const whenLanded = () => {
-            if (window.scrollY === 0 || (frames += 1) > 120) return window.location.reload();
-            requestAnimationFrame(whenLanded);
-        };
-        requestAnimationFrame(whenLanded);
     }
 
     function restoreScrollPosition() {
         if (sessionStorage.getItem(SCROLL_FLAG) !== "1") return;
         sessionStorage.removeItem(SCROLL_FLAG);
 
-        window.scrollTo(0, 0);
-        window.addEventListener("load", () => {
-            window.scrollTo(0, 0);
-            window.history.scrollRestoration = "auto";
-        }, { once: true });
+        window.history.scrollRestoration = "manual";
+
+        const toTop = () => window.scrollTo(0, 0);
+        toTop();
+        window.addEventListener("load", () => requestAnimationFrame(toTop), { once: true });
     }
 
     function buildStars(rating) {
@@ -137,7 +126,8 @@
             .then((data) => {
                 if (data && data.error) throw new Error(data.message || "add to cart failed");
                 button.textContent = "ADDED";
-                scrollToTopThenReload();
+                scrollToTopAfterReload();
+                window.location.reload();
             })
             .catch(() => {
                 button.disabled = false;
@@ -146,7 +136,7 @@
             });
     }
 
-    function buildSection(products) {
+    function buildSection() {
         const section = document.createElement("div");
         section.className = SECTION_CLASS;
 
@@ -157,36 +147,18 @@
 
         const grid = document.createElement("div");
         grid.className = "ab--product-grid ab--product-slider";
-        products.forEach((product) => grid.appendChild(buildCard(product)));
+        crossSellProducts.forEach((product) => grid.appendChild(buildCard(product)));
         section.appendChild(grid);
 
         return section;
     }
 
-    function getCartPids() {
-        const owned = [...document.querySelectorAll(`${ANCHOR} [data-pid]`)];
-        return new Set(owned.map((element) => element.getAttribute("data-pid")));
-    }
+    function insertSection(cards) {
+        if (document.querySelector(`.${SECTION_CLASS}`)) return;
 
-    function getAvailableProducts() {
-        const cartPids = getCartPids();
-        return crossSellProducts.filter((product) => !cartPids.has(product.SKU));
-    }
-
-    function syncSection() {
-        const products = getAvailableProducts();
-        const signature = products.map((product) => product.SKU).join(",");
-        const current = document.querySelector(`.${SECTION_CLASS}`);
-        if (current && signature === renderedSignature) return;
-
-        renderedSignature = signature;
-        if (current) current.remove();
-
-        const cards = document.querySelectorAll(ANCHOR);
-        if (!products.length || !cards.length) return;
-
-        const section = buildSection(products);
-        cards[cards.length - 1].insertAdjacentElement("afterend", section);
+        const section = buildSection();
+        const lastCard = cards[cards.length - 1];
+        lastCard.insertAdjacentElement("afterend", section);
         requestAnimationFrame(() => section.classList.add(READY_CLASS));
     }
 
@@ -195,9 +167,7 @@
             body.classList.add(BODY_CLASS);
         }
 
-        syncSection();
-
-        new MutationObserver(syncSection).observe(document.querySelector(CART_CONTAINER), { childList: true, subtree: true });
+        waitForElem(ANCHOR, insertSection, 1, false, 15000);
     }
 
     function mainJs([body]) {
