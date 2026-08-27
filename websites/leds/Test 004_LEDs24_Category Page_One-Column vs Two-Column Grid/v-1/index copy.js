@@ -1,6 +1,5 @@
 (function () {
     const STYLE_ID = "varify-listing-tweaks";
-    const BODY_CLASS = "leds24-test004";
 
     function injectStyle() {
         if (document.getElementById(STYLE_ID)) return;
@@ -166,43 +165,23 @@
 
     function observeListing(row) {
         var target = row.closest(".cms-element-product-listing") || row;
-        var observer = new MutationObserver(function (mutations) {
-            for (var i = 0; i < mutations.length; i++) {
-                if (mutations[i].type === "childList") markFeatureLists(target);
-            }
-
+        var observer = new MutationObserver(function () {
             normalizeIconSizes(target);
+            markFeatureLists(target);
         });
 
-        observer.observe(target, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ["style"],
-        });
+        observer.observe(target, {childList: true, subtree: true});
     }
 
-    function tagBody() {
-        if (document.body) {
-            document.body.classList.add(BODY_CLASS);
-            return;
-        }
-
-        document.addEventListener("DOMContentLoaded", tagBody);
-    }
-
-    tagBody();
-
-    window.varify.helpers.waitFor("body." + BODY_CLASS, function () {
+    window.varify.helpers.onDomLoaded(function () {
         injectStyle();
         markFeatureLists(document);
         normalizeIconSizes(document);
-
-        window.varify.helpers.waitFor(".cms-element-product-listing .cms-listing-row", function (row) {
-            injectStyle();
-            markFeatureLists(row);
-            normalizeIconSizes(row);
-            observeListing(row);
-        });
+    });
+    window.varify.helpers.waitFor(".cms-element-product-listing .cms-listing-row", function (row) {
+        injectStyle();
+        markFeatureLists(row);
+        normalizeIconSizes(row);
+        observeListing(row);
     });
 })();

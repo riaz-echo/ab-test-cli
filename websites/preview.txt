@@ -21,3 +21,7 @@ https://www.sgd.de/kursseite/realschulabschluss.html?varify-force=35586-53303
 TEST014[ILS]
 https://www.ils.de/fernkurse/fachwirt-im-gesundheits-und-sozialwesen-ihk/?varify-force=37966-56929
 
+TEST004[leds24] 
+https://www.leds24.com/LED-Leisten/?varify-force=40153-60427
+
+https://www.leds24.com/LED-Leisten/?varify-force=40928-61699

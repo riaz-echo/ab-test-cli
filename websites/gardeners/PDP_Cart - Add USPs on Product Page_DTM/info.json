@@ -1,0 +1,15 @@
+{
+  "id": "1787653329206_8435_PDP_Cart___Add_USPs_on_Product_Page_DTM",
+  "name": "PDP_Cart - Add USPs on Product Page_DTM",
+  "type": "A/B",
+  "website": "gardeners",
+  "variations": [
+    "control",
+    "v-1",
+    "v-2(cart)",
+    "v-3(all)"
+  ],
+  "createdAt": "2026-08-25T10:22:09.206Z",
+  "createdAtReadable": "8/25/2026, 4:22:09 PM",
+  "lastUpdated": "2026-08-26T11:24:04.332Z"
+}

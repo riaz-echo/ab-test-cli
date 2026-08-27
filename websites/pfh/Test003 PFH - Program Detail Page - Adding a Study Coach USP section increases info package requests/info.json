@@ -1,0 +1,13 @@
+{
+  "id": "1787306129260_2022_Test003_PFH___Program_Detail_Page___Adding_a_Study_Coach_USP_section_increases_info_package_requests",
+  "name": "Test003 PFH - Program Detail Page - Adding a Study Coach USP section increases info package requests",
+  "type": "A/B",
+  "website": "pfh",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-08-21T09:55:29.260Z",
+  "createdAtReadable": "8/21/2026, 3:55:29 PM",
+  "lastUpdated": "2026-08-21T09:55:29.406Z"
+}

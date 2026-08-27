@@ -1,15 +1,14 @@
 (function () {
     const STYLE_ID = "varify-listing-tweaks";
-    const BODY_CLASS = "leds24-test004";
 
     function injectStyle() {
-        if (document.getElementById(STYLE_ID)) return;
+    if (document.getElementById(STYLE_ID)) return;
 
-        const style = document.createElement("style");
-        style.id = STYLE_ID;
-        style.type = "text/css";
+    const style = document.createElement('style');
+    style.id = STYLE_ID;
+    style.type = 'text/css';
 
-        style.textContent = `
+    style.textContent = `
          /* Mobile: 2-column grid */
          @media (max-width: 575.98px) {
              .cms-element-product-listing .cms-listing-row {
@@ -47,10 +46,6 @@
                  height: auto !important;
                  width: 100%  !important;
              }
-
-             .product-feature-list-item .product-feature-value {
-                    display: block !important;
-             }
  
              .cms-element-product-listing .cms-listing-col .product-image-wrapper img.product-image {
                  order: 1 !important;
@@ -61,20 +56,6 @@
                  align-self: center !important;
              }
  
-             .cms-element-product-listing .cms-listing-col .product-image-wrapper img.cover-switch.product-image {
-                 top: 0 !important;
-                 left: 0 !important;
-                 right: auto !important;
-                 bottom: auto !important;
-                 width: 100% !important;
-                 height: auto !important;
-                 max-height: none !important;
-                 margin: 0 !important;
-                 transform: none !important;
-                 object-fit: contain !important;
-                 object-position: top center !important;
-             }
-
              .cms-element-product-listing .cms-listing-col .product-image-wrapper .k2p-product-icon-wrapper {
                  position: static !important;
                  order: 2 !important;
@@ -113,7 +94,6 @@
          .cms-element-product-listing .cms-listing-col img.k2p-product-icon-media {
              width: 24px !important;
              height: 24px !important;
-             object-fit: contain !important;
          }
  
          /* Product series spacing */
@@ -132,10 +112,13 @@
              left: 15px !important;
          }
      `;
+ 
+     document.head.appendChild(style);
+ }
+  
 
-        document.head.appendChild(style);
-    }
-
+    /* WebKit-sicherer Ersatz fuer ul:has(> .product-feature-list-item):
+     markiert die passenden Listen mit einer Klasse. */
     function markFeatureLists(scope) {
         var root = scope && scope.querySelectorAll ? scope : document;
         var items = root.querySelectorAll(".cms-element-product-listing .cms-listing-col .product-feature-list-item");
@@ -149,60 +132,12 @@
         }
     }
 
-    function normalizeIconSizes(scope) {
-        var root = scope && scope.querySelectorAll ? scope : document;
-        var icons = root.querySelectorAll(".cms-element-product-listing .cms-listing-col .product-image-wrapper .k2p-product-icon-wrapper img");
-
-        for (var i = 0; i < icons.length; i++) {
-            var icon = icons[i];
-            if (!icon.getAttribute("style")) continue;
-
-            icon.style.removeProperty("width");
-            icon.style.removeProperty("height");
-
-            if (!icon.getAttribute("style").trim()) icon.removeAttribute("style");
-        }
-    }
-
-    function observeListing(row) {
-        var target = row.closest(".cms-element-product-listing") || row;
-        var observer = new MutationObserver(function (mutations) {
-            for (var i = 0; i < mutations.length; i++) {
-                if (mutations[i].type === "childList") markFeatureLists(target);
-            }
-
-            normalizeIconSizes(target);
-        });
-
-        observer.observe(target, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ["style"],
-        });
-    }
-
-    function tagBody() {
-        if (document.body) {
-            document.body.classList.add(BODY_CLASS);
-            return;
-        }
-
-        document.addEventListener("DOMContentLoaded", tagBody);
-    }
-
-    tagBody();
-
-    window.varify.helpers.waitFor("body." + BODY_CLASS, function () {
+    window.varify.helpers.onDomLoaded(function () {
         injectStyle();
         markFeatureLists(document);
-        normalizeIconSizes(document);
-
-        window.varify.helpers.waitFor(".cms-element-product-listing .cms-listing-row", function (row) {
-            injectStyle();
-            markFeatureLists(row);
-            normalizeIconSizes(row);
-            observeListing(row);
-        });
+    });
+    window.varify.helpers.waitFor(".cms-element-product-listing .cms-listing-row", function (row) {
+        injectStyle();
+        markFeatureLists(row);
     });
 })();

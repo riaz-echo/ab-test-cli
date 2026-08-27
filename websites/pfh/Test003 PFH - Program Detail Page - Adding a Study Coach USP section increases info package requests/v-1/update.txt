@@ -1,0 +1,33 @@
+We just got final copy changes from the client. Please update the following texts in the variation. Everything else stays as it is.
+
+Headline
+
+"Hunderttausende" becomes "Hunderttausend".
+
+From:
+"Manche Hochschulen haben Hunderttausende Studierende.
+Wir kennen unsere mit Namen."
+
+To:
+"Manche Hochschulen haben Hunderttausend Studierende.
+Wir kennen unsere mit Namen."
+
+Bullet 2
+
+New text. Please note: the bold part now ends after "ändert", without the full stop. The rest of the sentence is not bold.
+
+From:
+"Kein Vertrag, der weiterläuft, wenn dein Leben sich ändert. Bei Krankheit, Kurzarbeit oder Arbeitslosigkeit kannst du das Zeitmodell wechseln oder den Vertrag anpassen."
+
+To:
+"Kein Vertrag, der weiterläuft, wenn dein Leben sich ändert - im Job, in der Familie oder einfach im Alltag. Du kannst das Zeitmodell wechseln oder den Vertrag ruhen lassen."
+
+Bullet 3
+
+New text. Please note: the bold part now starts at "Unser" and includes the full stop.
+
+From:
+"Deine Frage landet nicht in einer Warteschlange oder bei einer KI. Die Lehrenden deines Moduls antworten innerhalb von 48 Stunden. Nicht irgendwer, nicht irgendwann."
+
+To:
+"Deine Frage landet nicht in einer Warteschlange oder bei einer KI. Unser Fachfragen-Team antwortet innerhalb von 48 Stunden. Nicht irgendwer, nicht irgendwann."

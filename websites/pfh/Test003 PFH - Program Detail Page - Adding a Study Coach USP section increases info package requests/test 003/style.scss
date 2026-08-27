@@ -1,0 +1,221 @@
+$blue: #0a5ca8;
+$blue-dark: #133b89;
+$bg: #eaf5fa;
+$green: #e3f5ee;
+$orange: #ec633f;
+$text: #1b2b45;
+
+body.ab-t003-v1 {
+    .ab-t003__section {
+        background: $bg;
+        padding: 60px 20px;
+        font-family: inherit;
+    }
+
+    .ab-t003__inner {
+        padding: 0 5em;
+        margin: 0 auto;
+    }
+
+    .ab-t003__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: $blue;
+        margin-bottom: 24px;
+        font-family: Open Sans;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        line-height: 16px;
+        text-transform: uppercase;
+    }
+
+    .ab-t003__eyebrow svg {
+        flex: 0 0 auto;
+        display: block;
+        width: 16px;
+        height: 16px;
+        fill: none;
+
+        path {
+            fill: none;
+        }
+    }
+
+    .ab-t003__title {
+        margin: 0 0 24px;
+        color: $blue-dark;
+        font-family: Open Sans;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 48px;
+        letter-spacing: -1px;
+        word-wrap: inherit;
+    }
+
+    .ab-t003__content {
+        display: flex;
+        align-items: flex-start;
+        gap: 80px;
+    }
+
+    .ab-t003__col--text {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .ab-t003__col--media {
+        flex: 0 0 auto;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ab-t003__list {
+        list-style: none;
+        margin: 0 0 24px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .ab-t003__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        background: #ffffff;
+        border-radius: 6px;
+        padding: 14px 18px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .ab-t003__check-wrap {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: $green;
+        line-height: 0;
+
+        svg {
+            display: block;
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    .ab-t003__item-text {
+        margin: 0;
+        color: $text;
+        font-size: 14px;
+        line-height: 1.5;
+        strong {
+            font-weight: 700;
+        }
+    }
+
+    .ab-t003__actions {
+        display: flex;
+    }
+
+    .ab-t003__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: $orange;
+        color: #ffffff;
+        border: 1px solid #dce4ef;
+        box-shadow: 0px 2px 4px 0px rgba(20, 35, 60, 0.0784);
+        border-radius: 4px;
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1;
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: #d9531a;
+        }
+    }
+
+    .ab-t003__image {
+        display: block;
+        height: 280px;
+        width: auto;
+        max-width: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    @media (max-width: 991px) {
+        .ab-t003__section {
+            padding: 32px 24px;
+        }
+        .ab-t003__content {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .ab-t003__inner {
+            padding: 0;
+        }
+
+        .ab-t003__title {
+            margin: 0 0 25px;
+            font-size: 22px;
+            line-height: 31.72px;
+            letter-spacing: -0.26px;
+        }
+
+        .ab-t003__content {
+            gap: 22px;
+        }
+
+        .ab-t003__eyebrow {
+            font-size: 12px;
+            line-height: 18px;
+            margin-bottom: 9.5px;
+        }
+
+        .ab-t003__eyebrow svg {
+            width: 10px;
+            height: 12.5px;
+        }
+
+        .ab-t003__item {
+            padding: 24px 15px;
+        }
+
+        .ab-t003__check-wrap {
+            width: 30px;
+            height: 30px;
+            svg {
+                width: 17px;
+                height: 17px;
+            }
+        }
+        .ab-t003__list {
+            margin: 0 !important;
+        }
+        .ab-t003__image {
+            height: 213px;
+            width: 100%;
+        }
+
+        .ab-t003__actions {
+            margin-top: 14px;
+        }
+
+        .ab-t003__cta {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+}
