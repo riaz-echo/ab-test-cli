@@ -15,12 +15,17 @@
              .cms-element-product-listing .cms-listing-row {
                  display: flex;
                  flex-wrap: wrap;
+                 margin-left: -8px !important;
+                 margin-right: -8px !important;
+                 padding:0 !important;
              }
  
              .cms-element-product-listing .cms-listing-col.col-12 {
                  flex: 0 0 50% !important;
                  max-width: 50% !important;
                  width: 50% !important;
+                 padding-left: 8px !important;
+                 padding-right: 8px !important;
              }
  
              /* Mobile: price above, availability below */
