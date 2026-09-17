@@ -91,6 +91,9 @@
         try {
             !document.body.classList.contains(BODY_CLASS) && document.body.classList.add(BODY_CLASS);
 
+            const PDP_TYPE_CLASS = window.location.pathname.includes("/products/") ? "ab--pdp-normal" : "ab--pdp-special";
+            !document.body.classList.contains(PDP_TYPE_CLASS) && document.body.classList.add(PDP_TYPE_CLASS);
+
             return document.body.classList.contains(BODY_CLASS);
         } catch (error) {
             console.error(`${TEST_ID}-${VARIANT_ID} addBodyClass error:`, error);

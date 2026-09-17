@@ -16,7 +16,6 @@ body.ab--pdp-usp {
         justify-content: space-between;
         gap: 8px;
         margin: 15px 0;
-        padding: 15px 42px;
         list-style: none;
         background: $ab-usp-bar-bg;
         border-radius: 9px;
@@ -26,7 +25,7 @@ body.ab--pdp-usp {
             flex: 1 1 0;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
             min-width: 0;
             padding: 0 4px;
             text-align: center;
@@ -44,16 +43,16 @@ body.ab--pdp-usp {
 
             svg {
                 display: block;
-                width: 24px;
-                height: 24px;
+                width: 19px;
+                height: 19px;
             }
         }
 
         .ab--usp-label {
-            font-family: Open Sans;
+            font-family: inherit !important;
             color: $ab-usp-text;
-            font-size: 14px;
             font-weight: 700;
+            font-size: 14px !important;
             line-height: 1.25;
             letter-spacing: 0%;
 
@@ -77,17 +76,51 @@ body.ab--pdp-usp {
             .ab--usp-icon {
                 width: 32px;
                 height: 32px;
-            }
-
-            .ab--usp-label {
-                font-size: 12px;
+                svg {
+                    width: 16px;
+                    height: 16px;
+                }
             }
         }
     }
+}
 
-    @media (max-width: 400px) {
-        .ab--usp-bar .ab--usp-label {
-            font-size: 11px;
+body.ab--pdp-usp {
+    @media (max-width: 767px) {
+        .ab--usp-bar {
+            border-radius: 5px;
         }
+    }
+}
+
+body.ab--pdp-usp {
+    .ab--usp-bar {
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+}
+
+body.ab--pdp-usp {
+    @media (max-width: 767px) {
+        .ab--usp-bar {
+            padding-right: clamp(6px, 2vw, 15px);
+            padding-left: clamp(6px, 2vw, 15px);
+            .ab--usp-label {
+                font-size: clamp(10px, 3.1vw, 12px) !important;
+            }
+        }
+        &.ab--pdp-special .ab--usp-label {
+            font-size: clamp(10px, 2.5vw, 12px) !important;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    body.ab--pdp-usp.ab--pdp-normal .ab--usp-bar {
+        padding: 15px;
+    }
+
+    body.ab--pdp-usp.ab--pdp-special .ab--usp-bar {
+        padding: 15px clamp(2.5em, 43px, 3.5em);
     }
 }

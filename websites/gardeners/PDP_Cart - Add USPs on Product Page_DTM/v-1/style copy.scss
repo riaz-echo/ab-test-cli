@@ -44,13 +44,13 @@ body.ab--pdp-usp {
 
             svg {
                 display: block;
-                width: 24px;
-                height: 24px;
+                width: 19px;
+                height: 19px;
             }
         }
 
         .ab--usp-label {
-            font-family: Open Sans;
+            font-family: inherit !important;
             color: $ab-usp-text;
             font-size: 14px;
             font-weight: 700;
@@ -75,8 +75,8 @@ body.ab--pdp-usp {
             }
 
             .ab--usp-icon {
-                width: 42px;
-                height: 42px;
+                width: 32px;
+                height: 32px;
             }
 
             .ab--usp-label {

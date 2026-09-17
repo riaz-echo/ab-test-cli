@@ -80,7 +80,6 @@ body.ab--all-usp {
             font-family: inherit !important;
             color: $ab-usp-text;
             font-weight: 700;
-            font-size: 14px !important;
             line-height: 1.25;
             letter-spacing: 0%;
 
@@ -119,7 +118,7 @@ body.ab--all-usp {
         }
     }
     .ab--usp-bar--side-cart {
-        padding: 14px 2.5em;
+        padding: 14px 3.5em;
         @media (max-width: 767px) {
             padding: 14px clamp(2.5em, 2.5vw, 3.5em) !important;
         }
@@ -168,9 +167,13 @@ body.ab--all-usp {
             border-radius: 5px;
         }
     }
+
+    @media (min-width: 768px) {
+        .ab--usp-bar--side-cart .ab--usp-label {
+            font-size: 14px;
+        }
+    }
 }
-
-
 
 body.ab--all-usp {
     .ab--usp-bar {
@@ -180,11 +183,7 @@ body.ab--all-usp {
 
     @media (max-width: 767px) {
         .ab--usp-bar .ab--usp-label {
-            font-size: clamp(10px, 3.1vw, 12px) !important;
-        }
-
-        &.ab--pdp-special .ab--usp-bar--pdp .ab--usp-label {
-            font-size: clamp(10px, 2.5vw, 12px) !important;
+            font-size: clamp(10px, 2.9vw, 14px);
         }
     }
 }
@@ -192,18 +191,18 @@ body.ab--all-usp {
 body.ab--all-usp {
     @media (max-width: 767px) {
         .ab--usp-bar {
-            padding-right: clamp(6px, 3vw, 15px);
-            padding-left: clamp(6px, 3vw, 15px);
+            padding-right: clamp(6px, 2vw, 15px);
+            padding-left: clamp(6px, 2vw, 15px);
         }
     }
 }
 
 @media (min-width: 768px) {
     body.ab--all-usp.ab--pdp-normal .ab--usp-bar--pdp {
-        padding: 15px;
+        padding: 15px clamp(1rem, 43px, 5.5em);
     }
 
     body.ab--all-usp.ab--pdp-special .ab--usp-bar--pdp {
-        padding: 15px clamp(2.5em, 43px, 3.5em);
+        padding: 15px clamp(4.5em, 43px, 5.5em);
     }
 }

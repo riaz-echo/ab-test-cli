@@ -1,0 +1,14 @@
+
+
+fixed :
+2) Spacing between the icon and text should be reduced to 5px for all devices.
+4) Border radius for desktop should be 9px and for mobile 5px.
+3) The usps does not appear to be centered on smaller mobile screen.
+1) The font size on desktop is 14px throughout. As no Figma design has been provided for this, we suggest matching the same size here for consistency.
+2) Additionally, could you please add padding to the left and right sides to better align it with the USP section on the PDP.
+3) There is excessive spacing on desktop and big mobile viewports, which makes it appear visually inconsistent.
+1) Font size and spacing around the container does not matchd design.
+1)The usp icons appears to be bigger than design for both mobile and desktop.
+5) The spacing appears to not match design. Additionally, the card width has increased significantly, resulting in excessive spacing in cards with less content.
+2) There is excessive spacing on desktop and big mobile viewports, which makes it appear visually inconsistent.
+The correct font is not being rendered across all targeted locations. (PDPs, the side cart, and the cart page)
