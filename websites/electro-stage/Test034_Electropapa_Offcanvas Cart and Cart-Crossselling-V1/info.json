@@ -1,0 +1,14 @@
+{
+  "id": "1787758714912_8254_Test034_Electropapa_Offcanvas_Cart_and_Cart_Crossselling_V1",
+  "name": "Test034_Electropapa_Offcanvas Cart and Cart-Crossselling-V1",
+  "type": "A/B",
+  "website": "electro-stage",
+  "variations": [
+    "control",
+    "v-1",
+    "v-2(cart-page)"
+  ],
+  "createdAt": "2026-08-26T15:38:34.912Z",
+  "createdAtReadable": "8/26/2026, 9:38:34 PM",
+  "lastUpdated": "2026-08-27T14:59:39.760Z"
+}

@@ -1,0 +1,308 @@
+$ab-blue: #3e7fb5;
+$ab-blue-hover: #336a99;
+$ab-blue-light: #47b4eb;
+$ab-star: #ffdc70;
+$ab-text: #758ca3;
+$ab-border: #e3e7eb;
+
+$ab-star-blank: #d8dde3;
+$ab-star-size: 12px;
+$ab-star-size-mobile: 10px;
+$ab-star-gap: 3px;
+
+$ab-card-width: 210px;
+$ab-card-width-mobile: 150px;
+$ab-image-size: 140px;
+$ab-image-size-mobile: 112px;
+$ab-breakpoint: 768px;
+
+@keyframes ab--t034-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+body.ab--t034-v2 {
+    .checkout .elio-cart-recommendation-wrapper > *:not(.ab--cs-section) {
+        display: none !important;
+    }
+
+    .checkout .elio-cart-recommendation-wrapper {
+        position: relative;
+        min-height: 300px;
+    }
+
+    .checkout .elio-cart-recommendation-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 2rem;
+        height: 2rem;
+        margin: -1rem 0 0 -1rem;
+        border: 0.25em solid #3e7fb5;
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: ab--t034-spin 0.75s linear infinite;
+    }
+
+    .checkout .elio-cart-recommendation-wrapper.ab--cs-ready {
+        min-height: 0;
+
+        &::before {
+            content: none;
+        }
+    }
+
+    .ab--cs-section {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+
+        &.ab--cs-section--empty {
+            display: none;
+        }
+    }
+
+    .ab--cs-headline {
+        margin: 0 0 16px;
+        color: $ab-blue-light;
+        font-size: 22px;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+    .ab--cs-list {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 8px;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            display: none;
+        }
+    }
+
+    .ab--cs-card {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 $ab-card-width;
+        width: $ab-card-width;
+        background: #ffffff;
+        scroll-snap-align: start;
+
+        &.ab--cs-card--hidden {
+            display: none;
+        }
+    }
+    .product-image-wrapper {
+        position: relative;
+        margin-bottom: 12px;
+    }
+
+    .product-image-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+    }
+
+    .product-image {
+        flex-shrink: 0;
+        width: $ab-image-size;
+        height: $ab-image-size;
+        object-fit: contain;
+    }
+
+    .ab--cs-card .product-wishlist-btn {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .ab--cs-name {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 12px;
+        color: $ab-text;
+        font-size: 13px;
+        line-height: 1.35;
+        text-decoration: none;
+
+        &:hover {
+            color: $ab-blue;
+            text-decoration: none;
+        }
+    }
+
+    .ab--cs-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-top: auto;
+    }
+
+    .ab--cs-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 0;
+    }
+
+    .ab--cs-price {
+        color: $ab-blue;
+        font-size: 14px;
+        line-height: 1.2;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .ab--cs-rating {
+        display: flex;
+        align-items: center;
+        min-height: $ab-star-size;
+
+        .product-review-rating {
+            display: flex;
+            align-items: center;
+            gap: $ab-star-gap;
+            margin: 0;
+        }
+
+        .product-review-point,
+        .point-container,
+        .point-rating {
+            display: flex;
+            align-items: center;
+            width: auto;
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .icon {
+            display: block;
+            flex: 0 0 auto;
+            width: $ab-star-size;
+            height: $ab-star-size;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+
+            > svg {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .point-full .icon use,
+        .point-half .icon use {
+            fill: $ab-star;
+        }
+
+        .point-blank .icon use {
+            fill: $ab-star-blank;
+        }
+    }
+
+    .ab--cs-atc {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        width: 72px;
+        height: 30px;
+        padding: 0;
+        border: 0;
+        border-radius: 4px;
+        background: $ab-blue;
+        color: #ffffff;
+        cursor: pointer;
+        transition:
+            background-color 0.15s ease-in-out,
+            opacity 0.15s ease-in-out;
+
+        svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        &:hover,
+        &:focus {
+            background: $ab-blue-hover;
+            color: #ffffff;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $ab-blue;
+            outline-offset: 2px;
+        }
+
+        &.ab--cs-atc--loading {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        &[disabled] {
+            pointer-events: none;
+        }
+    }
+
+    @media (max-width: #{$ab-breakpoint - 0.02px}) {
+        .ab--cs-headline {
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .ab--cs-list {
+            gap: 9px;
+        }
+
+        .ab--cs-card {
+            flex: 0 0 $ab-card-width-mobile;
+            width: $ab-card-width-mobile;
+        }
+
+        .product-image {
+            width: $ab-image-size-mobile;
+            height: $ab-image-size-mobile;
+        }
+
+        .ab--cs-name {
+            font-size: 12px;
+        }
+
+        .ab--cs-price {
+            font-size: 14px;
+        }
+        .ab--cs-rating {
+            min-height: $ab-star-size-mobile;
+
+            .icon {
+                width: $ab-star-size-mobile;
+                height: $ab-star-size-mobile;
+            }
+        }
+
+        .ab--cs-atc {
+            width: 64px;
+            height: 28px;
+
+            svg {
+                width: 19px;
+                height: 19px;
+            }
+        }
+    }
+}
