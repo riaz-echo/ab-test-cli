@@ -1,0 +1,13 @@
+{
+  "id": "1789467826778_413_Cart___Optimize_Cart_Page_DTM",
+  "name": "Cart - Optimize Cart Page-DTM",
+  "type": "A/B",
+  "website": "dutchbulbs",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-09-15T10:23:46.778Z",
+  "createdAtReadable": "9/15/2026, 4:23:46 PM",
+  "lastUpdated": "2026-09-15T10:23:46.889Z"
+}
