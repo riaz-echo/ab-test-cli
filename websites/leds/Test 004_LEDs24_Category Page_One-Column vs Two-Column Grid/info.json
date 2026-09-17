@@ -5,9 +5,10 @@
   "website": "leds",
   "variations": [
     "control",
-    "v-1"
+    "v-1",
+    "v-2"
   ],
   "createdAt": "2026-08-12T07:34:55.272Z",
   "createdAtReadable": "8/12/2026, 1:34:55 PM",
-  "lastUpdated": "2026-08-12T07:34:55.372Z"
+  "lastUpdated": "2026-09-01T12:41:04.705Z"
 }
