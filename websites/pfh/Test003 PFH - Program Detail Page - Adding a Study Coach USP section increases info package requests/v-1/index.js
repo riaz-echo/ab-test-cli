@@ -318,8 +318,7 @@
     const TEST_CLASS = "ab-t003-v1";
     const PREFIX = "ab-t003";
 
-    const PC_IMAGE_SRC = "https://www.pfh.de/sites/default/files/images/visuals/pfh-herbstrabatt-fs-visual-desktop.jpg";
-    const MOBILE_IMAGE_SRC = "https://www.pfh.de/sites/default/files/images/visuals/pfh-herbstrabatt-fs-visual-mobile.jpg";
+    const IMAGE_SRC = "https://www.pfh.de/sites/default/files/images/visuals/pfh-herbstrabatt-fs-visual-desktop.jpg";
 
     const CHECK_SVG = `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="path-1-inside-1_1404_648" fill="white">
@@ -362,7 +361,7 @@
             </ul>
           </div>
           <div class="${PREFIX}__col ${PREFIX}__col--media">
-            <img class="${PREFIX}__image" src="${isDeviceMobile ? MOBILE_IMAGE_SRC : PC_IMAGE_SRC}" alt="Jetzt bis zu 1.650 € Rabatt zum Studienstart sichern" loading="lazy">
+            <img class="${PREFIX}__image" src="${IMAGE_SRC}" alt="Jetzt bis zu 1.650 € Rabatt zum Studienstart sichern" loading="lazy">
           </div>
         </div>
         <div class="${PREFIX}__actions">
