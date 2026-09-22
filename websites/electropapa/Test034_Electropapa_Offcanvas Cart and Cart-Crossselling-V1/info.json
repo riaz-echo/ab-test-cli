@@ -1,0 +1,13 @@
+{
+  "id": "1790072372634_1960_Test034_Electropapa_Offcanvas_Cart_and_Cart_Crossselling_V1",
+  "name": "Test034_Electropapa_Offcanvas Cart and Cart-Crossselling-V1",
+  "type": "A/B",
+  "website": "electropapa",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-09-22T10:19:32.634Z",
+  "createdAtReadable": "9/22/2026, 4:19:32 PM",
+  "lastUpdated": "2026-09-22T10:19:32.757Z"
+}

@@ -2,7 +2,7 @@
   "multiple_rules_check_by_condition": "OR",
   "targeting_rules": [
     {
-      "value": "/https?:\\/\\/(www\\.)?[^\\s/$.?#].[^\\s]*/gi",
+      "value": "/^https?:\\/\\/(www\\.)?electropapa\\.com\\/de(?:[/?#]|$)/i",
       "match_type": "REGEX_MATCHED"
     }
   ],

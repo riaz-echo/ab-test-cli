@@ -101,7 +101,7 @@
 const offcanvasCartRecommendationsApiUrl = "/de/widgets/elio-data-discovery/cart-recommendations?offcanvas=1";
 
 try {
-    const response = await fetch(offcanvasCartRecommendationsApiUrl, {
+    const response = await fetch("/de/widgets/elio-data-discovery/cart-recommendations?offcanvas=1", {
         method: "GET",
         credentials: "same-origin",
         headers: {
@@ -119,27 +119,3 @@ try {
 } catch (err) {
     console.error(err);
 }
-
-
-control api payload src :
-
-
-lineItems[78397094a0976b0346cae5ed8946ede6][quantity]
-1
-redirectTo
-frontend.cart.offcanvas
-lineItems[78397094a0976b0346cae5ed8946ede6][isScl]
-false
-lineItems[78397094a0976b0346cae5ed8946ede6][id]
-78397094a0976b0346cae5ed8946ede6
-lineItems[78397094a0976b0346cae5ed8946ede6][type]
-product
-lineItems[78397094a0976b0346cae5ed8946ede6][referencedId]
-78397094a0976b0346cae5ed8946ede6
-lineItems[78397094a0976b0346cae5ed8946ede6][stackable]
-1
-lineItems[78397094a0976b0346cae5ed8946ede6][removable]
-1
-product-name
-Kamera-Akku (2 Stück) als Ersatz für Panasonic DMW-BCM13E, DMW-BCM13 für Panasonic - 900mAh 3,6V Li-Ion
-brand-name
