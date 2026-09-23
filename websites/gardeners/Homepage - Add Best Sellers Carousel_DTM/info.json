@@ -1,0 +1,13 @@
+{
+  "id": "1790017287310_6389_Homepage___Add_Best_Sellers_Carousel_DTM",
+  "name": "Homepage - Add Best Sellers Carousel_DTM",
+  "type": "A/B",
+  "website": "gardeners",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-09-21T19:01:27.311Z",
+  "createdAtReadable": "9/22/2026, 1:01:27 AM",
+  "lastUpdated": "2026-09-21T19:01:27.621Z"
+}
