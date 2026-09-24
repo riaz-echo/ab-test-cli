@@ -25,6 +25,10 @@ $ab-image-size-cartpage-mobile: 116px;
     }
 }
 
+body.ab-test034 .checkout .d-none[data-cross-selling-reveal] {
+    display: block !important;
+}
+
 body.ab-test034 .product-image-wrapper {
     flex-grow: unset;
 }
