@@ -1,0 +1,20 @@
+$form-wrapper: ".product-form__quantity-and-buy-buttons-wrapper";
+
+#{$form-wrapper} {
+    .quantity-input-wrapper__cart-count {
+        display: none;
+    }
+    .quantity-input-wrapper__labels {
+        flex-wrap: wrap;
+    }
+
+    .quantity-input-wrapper__label {
+        display: inline;
+    }
+
+    .ab-dbc-copy {
+        font: inherit;
+        font-weight: 400;
+        white-space: normal;
+    }
+}

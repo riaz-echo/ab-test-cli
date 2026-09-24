@@ -1,0 +1,12 @@
+$form-wrapper: ".product-form__quantity-and-buy-buttons-wrapper";
+
+#{$form-wrapper} {
+    .quantity-input-wrapper__cart-count {
+        display: none;
+    }
+    .product-form__item--submit [data-add-to-cart] {
+        [data-add-to-cart-text] {
+            white-space: nowrap;
+        }
+    }
+}

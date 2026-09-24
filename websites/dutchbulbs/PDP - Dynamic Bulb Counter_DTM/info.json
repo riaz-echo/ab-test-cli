@@ -1,0 +1,14 @@
+{
+  "id": "1789994277319_8247_PDP___Dynamic_Bulb_Counter_DTM",
+  "name": "PDP - Dynamic Bulb Counter_DTM",
+  "type": "A/B",
+  "website": "dutchbulbs",
+  "variations": [
+    "control",
+    "v-1",
+    "v-2"
+  ],
+  "createdAt": "2026-09-21T12:37:57.319Z",
+  "createdAtReadable": "9/21/2026, 6:37:57 PM",
+  "lastUpdated": "2026-09-21T12:48:21.426Z"
+}
