@@ -47,7 +47,7 @@
             "Price": 76.49,
             "Original Price": 89.99,
             "Sale": 0.15,
-            "Price Prefix": null,
+            "Price Prefix": "from",
             "Image URL": "https://www.gardeners.com/cdn/shop/files/8587040_RD_001E_tomato-cages-tif.png?v=1758287991&width=1800",
             "URL": "https://www.gardeners.com/products/tomato-cages",
             "Exclusive Badge": true,
@@ -137,29 +137,24 @@
 
     const BODY_CLASS = "ab--home-best-sellers";
     const SECTION_CLASS = "ab--bs-section";
-    const HERO_SELECTOR = "main section .slideshow.section.section--hero";
+    const HERO_SELECTOR = ".main section .collection-list";
     const HEADING_TEXT = "Shop Our Best Sellers";
 
     const BADGES = {
         designedByGsc: {
+            key: "gsc",
             src: "https://cdn.shopify.com/s/files/1/0770/9032/4705/files/4159555.png",
             alt: "Designed by GSC",
         },
         exclusive: {
+            key: "exclusive",
             src: "https://cdn.shopify.com/s/files/1/0770/9032/4705/files/badge_product_exclusive.webp?v=1758723375",
             alt: "Exclusive",
         },
     };
 
-    const HANDLERS = {
-        quickView: null,
-        quickAdd: null,
-    };
-
     const SVG = {
-        eye: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0875 15.6805C13.9032 15.6805 15.375 14.2086 15.375 12.393C15.375 10.5773 13.9032 9.10547 12.0875 9.10547C10.2719 9.10547 8.80005 10.5773 8.80005 12.393C8.80005 14.2086 10.2719 15.6805 12.0875 15.6805Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22.489 11.7954C21.3901 10.5555 17.0224 6 11.8 6C6.57759 6 2.20992 10.5555 1.11096 11.7954C1.03921 11.8827 1 11.9923 1 12.1053C1 12.2184 1.03921 12.3279 1.11096 12.4153C2.20992 13.6552 6.57759 18.2107 11.8 18.2107C17.0224 18.2107 21.3901 13.6552 22.489 12.4153C22.5608 12.3279 22.6 12.2184 22.6 12.1053C22.6 11.9923 22.5608 11.8827 22.489 11.7954V11.7954Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
         arrow: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 12.4016H11.5H23M23 12.4016L13.8 3M23 12.4016L13.8 21.8032" stroke="currentColor" stroke-width="1.75"/></svg>`,
-        star: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1.5l3.09 6.83 7.41.8-5.5 5.05 1.5 7.32L12 17.77 5.5 21.5 7 14.18 1.5 9.13l7.41-.8L12 1.5z" fill="currentColor"/></svg>`,
     };
 
     function logInfo(message) {
@@ -220,19 +215,19 @@
         product.exclusiveBadge && badges.push(BADGES.exclusive);
         if (!badges.length) return "";
 
-        const items = badges.map((badge) => `<img class="ab--bs-badge" loading="lazy" src="${escapeHtml(badge.src)}" alt="${escapeHtml(badge.alt)}" />`).join("");
+        const items = badges.map((badge) => `<img class="ab--bs-badge ab--bs-badge--${badge.key}" loading="lazy" src="${escapeHtml(badge.src)}" alt="${escapeHtml(badge.alt)}" />`).join("");
         return `<div class="ab--bs-badges">${items}</div>`;
     }
 
-    function buildStarsHtml(rating) {
-        const clamped = Math.max(0, Math.min(5, rating));
-        const percent = (clamped / 5) * 100;
-        const stars = SVG.star.repeat(5);
+    function getStarFill(rating, index) {
+        const remaining = Math.max(0, Math.min(1, rating - index));
+        return Math.round(remaining * 4) * 25;
+    }
 
-        return `<span class="ab--bs-stars" role="img" aria-label="${clamped} out of 5 stars">
-        <span class="ab--bs-stars-base">${stars}</span>
-        <span class="ab--bs-stars-fill" style="width: ${percent}%;">${stars}</span>
-      </span>`;
+    function buildStarsHtml(rating) {
+        const stars = [0, 1, 2, 3, 4].map((index) => `<span class="ab--bs-star ab--bs-star--${getStarFill(rating, index)}" aria-hidden="true"></span>`).join("");
+
+        return `<span class="ab--bs-stars" role="img" aria-label="Rated ${rating} out of 5 stars">${stars}</span>`;
     }
 
     function buildRatingHtml(product) {
@@ -264,13 +259,11 @@
             <img class="ab--bs-image" loading="lazy" src="${escapeHtml(product.image)}" alt="${name}" draggable="false" />
           </a>
           ${buildBadgesHtml(product)}
-          <button type="button" class="ab--bs-quick-view" data-ab-quick-view title="Quick View" aria-label="Quick View">${SVG.eye}</button>
         </div>
         <div class="ab--bs-meta">
           <h3 class="ab--bs-title"><a href="${url}" draggable="false">${name}</a></h3>
           ${buildRatingHtml(product)}
           ${buildPriceHtml(product)}
-          <button type="button" class="ab--bs-quick-add" data-ab-quick-add aria-label="Choose options for ${name}">Choose options</button>
         </div>
       </div>`;
     }
@@ -403,8 +396,6 @@
         updateControls();
     }
 
-    // Mouse drag-to-scroll for fine pointers (touch already scrolls natively).
-    // A small drag suppresses the click that would otherwise fire on release.
     function initDragScroll(track) {
         const MOVE_DELTA_TO_PREVENT_CLICK = 3;
         let isDown = false;
@@ -435,7 +426,6 @@
         const release = () => {
             isDown = false;
             track.classList.remove("is-mouse-down");
-            // Keep the dragging class until the click event has been swallowed.
             setTimeout(() => track.classList.remove("is-dragging"), 0);
         };
 
@@ -450,78 +440,12 @@
         }, true);
     }
 
-    function getProductFromItem(item, products) {
-        const index = parseInt(item.dataset.index, 10);
-        return products[index] || {name: item.dataset.title, url: item.dataset.url, image: ""};
-    }
-
-    function buildModalPlaceholderMedia(product) {
-        const wrapper = document.createElement("div");
-        wrapper.className = "ab--bs-modal-placeholder";
-        wrapper.innerHTML = `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" />`;
-        return wrapper;
-    }
-
-    // type: "quick-view" | "quick-add"
-    function openQuickProduct(type, product) {
-        try {
-            const handler = type === "quick-view" ? HANDLERS.quickView : HANDLERS.quickAdd;
-            if (typeof handler === "function") {
-                handler(product);
-                return;
-            }
-
-            if (typeof window.emit !== "function") {
-                logInfo(`window.emit unavailable, falling back to PDP for ${type}`);
-                window.location.href = product.url;
-                return;
-            }
-
-            const payload = {
-                type,
-                productUrl: product.url,
-                productTitle: product.name,
-            };
-
-            // Quick view shows the image as a placeholder while the theme fetches content.
-            type === "quick-view" && (payload.productMedia = buildModalPlaceholderMedia(product));
-
-            window.emit(`${type}:open`, null, payload);
-            logInfo(`${type} opened for "${product.name}"`);
-        } catch (error) {
-            console.error(`${TEST_ID}-${VARIANT_ID} openQuickProduct error:`, error);
-            product.url && (window.location.href = product.url);
-        }
-    }
-
-    function bindProductActions(section, products) {
-        section.addEventListener("click", (event) => {
-            const quickView = event.target.closest("[data-ab-quick-view]");
-            const quickAdd = event.target.closest("[data-ab-quick-add]");
-            if (!quickView && !quickAdd) return;
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            const item = event.target.closest("[data-ab-item]");
-            if (!item) return;
-
-            openQuickProduct(quickView ? "quick-view" : "quick-add", getProductFromItem(item, products));
-        });
-    }
-
-    /* ---------------------------------------------------------------- */
-    /* Insert                                                            */
-    /* ---------------------------------------------------------------- */
-
-    function insertSection(hero, products) {
+    function insertSection(collection_list, products) {
         try {
             if (document.querySelector(`.${SECTION_CLASS}`)) return null;
 
-            // Insert after the whole Shopify section wrapping the hero, so we sit
-            // between the hero and the next homepage section.
-            const anchor = hero.closest("section.shopify-section") || hero;
-            anchor.insertAdjacentHTML("afterend", buildSectionHtml(products));
+            const anchor = collection_list.closest("section.shopify-section") || collection_list;
+            anchor.insertAdjacentHTML("beforebegin", buildSectionHtml(products));
 
             const section = document.querySelector(`.${SECTION_CLASS}`);
             logInfo(`Best sellers carousel inserted with ${products.length} products`);
@@ -535,16 +459,15 @@
     function initBestSellers() {
         const products = (Array.isArray(PRODUCTS) ? PRODUCTS : []).map(normalizeProduct).filter((product) => product.name && product.url);
         if (!products.length) {
-            logInfo("No products in data.json, nothing to render");
+            logInfo("No products to render");
             return;
         }
 
-        waitForElem(HERO_SELECTOR, ([hero]) => {
-            const section = insertSection(hero, products);
+        waitForElem(HERO_SELECTOR, ([collection_list]) => {
+            const section = insertSection(collection_list, products);
             if (!section) return;
 
             initCarousel(section);
-            bindProductActions(section, products);
         });
     }
 

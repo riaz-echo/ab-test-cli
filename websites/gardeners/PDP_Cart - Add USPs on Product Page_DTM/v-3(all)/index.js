@@ -241,22 +241,13 @@
         watchFooterHeight();
     }
 
-    function reportPlacements() {
-        setTimeout(() => {
-            const summary = PLACEMENTS.map((placement) => `${placement.name}: ${document.querySelector(`.${placement.modifier}`) ? "yes" : "no"}`).join(", ");
-
-            logInfo(`placed - ${summary}`);
-        }, 10000);
-    }
-
-    function mainJs([body]) {
+    function mainJs() {
         try {
             logInfo("fired");
 
             if (!addBodyClass()) return;
 
             initUspBars();
-            reportPlacements();
         } catch (error) {
             console.error(`${TEST_ID}-${VARIANT_ID} mainJs error:`, error);
         }
