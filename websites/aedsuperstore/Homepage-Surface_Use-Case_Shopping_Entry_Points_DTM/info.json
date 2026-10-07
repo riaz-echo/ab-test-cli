@@ -1,0 +1,14 @@
+{
+  "id": "1790868418402_6662_Homepage_Surface_Use_Case_Shopping_Entry_Points_DTM",
+  "name": "Homepage-Surface_Use-Case_Shopping_Entry_Points_DTM",
+  "type": "A/B",
+  "website": "aedsuperstore",
+  "variations": [
+    "control",
+    "v-1",
+    "v-2"
+  ],
+  "createdAt": "2026-10-01T15:26:58.402Z",
+  "createdAtReadable": "10/1/2026, 9:26:58 PM",
+  "lastUpdated": "2026-10-01T15:27:02.639Z"
+}

@@ -1,0 +1,178 @@
+$prefix: ab-org;
+$navy: #0d21a1;
+$tile-bg: #eaf4fa;
+$tile-border: #dddddd;
+$desktop: 768px;
+
+.#{$prefix} {
+  background: #ffffff;
+  padding: 15px 0 15px;
+
+  @media (min-width: $desktop) {
+    padding: 40px 0 14px;
+  }
+
+  &__title {
+    margin: 0 0 12px;
+    color: #262626;
+    font-family: Rubik, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    @media (min-width: $desktop) {
+      margin-bottom: 16px;
+      color: #4a4a4a;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+
+    @media (min-width: $desktop) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+  }
+
+  &__tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 84px;
+    padding: 0 8px;
+    background: $tile-bg;
+    border: 1.5px solid $tile-border;
+    border-radius: 10px;
+    text-align: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &,
+    &:hover,
+    &:focus,
+    &:visited {
+      color: $navy;
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $navy;
+      outline-offset: 2px;
+    }
+
+    @media (min-width: $desktop) {
+      height: 104px;
+    }
+
+    @media (min-width: $desktop) and (hover: hover) {
+      &:hover {
+        border-color: $navy;
+        box-shadow: 0 4px 12px rgba(13, 33, 161, 0.12);
+      }
+    }
+  }
+
+  &__icon {
+    display: flex;
+    width: 30px;
+    height: 30px;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__label {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+
+    @media (min-width: $desktop) {
+      font-size: 16px;
+    }
+  }
+
+  &__more {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows 0.3s ease, visibility 0.3s;
+
+    .#{$prefix}__grid {
+      padding-top: 8px;
+    }
+  }
+
+  &__more-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &.is-expanded &__more {
+    grid-template-rows: 1fr;
+    visibility: visible;
+  }
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    margin: 0;
+    padding: 16px 0 0;
+    background: none;
+    border: 0;
+    color: $navy;
+    font-family: Rubik, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid $navy;
+      outline-offset: 2px;
+    }
+  }
+
+  &__toggle-text {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    margin-left: 2px;
+  }
+
+  &.is-expanded &__chevron {
+    transform: rotate(180deg);
+  }
+
+  @media (min-width: $desktop) {
+    &__more {
+      grid-template-rows: 1fr;
+      visibility: visible;
+
+      .#{$prefix}__grid {
+        padding-top: 16px;
+      }
+    }
+
+    &__toggle {
+      display: none;
+    }
+  }
+}
