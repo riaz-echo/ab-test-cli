@@ -1,0 +1,14 @@
+{
+  "id": "1790691571344_3511_Test007_Trigema_PDP_A_B_C_Test_Lieferzeitraum_anzeigen",
+  "name": "Test007_Trigema-PDP-A-B-C-Test-Lieferzeitraum-anzeigen",
+  "type": "A/B",
+  "website": "trigema",
+  "variations": [
+    "control",
+    "v-1",
+    "v-2"
+  ],
+  "createdAt": "2026-09-29T14:19:31.344Z",
+  "createdAtReadable": "9/29/2026, 8:19:31 PM",
+  "lastUpdated": "2026-09-29T14:19:37.865Z"
+}
