@@ -1,14 +1,10 @@
 $body-class: "body.ab-dbc-v1";
 $form-wrapper: ".product-form__quantity-and-buy-buttons-wrapper";
 $mobile: 767px;
-$small-mobile: 400px;
+$small-mobile: 401px;
 $very-small-mobile: 389px;
 #{$body-class} {
     #{$form-wrapper} {
-        .quantity-input-wrapper__cart-count {
-            display: none;
-        }
-
         .product-form__item--submit [data-add-to-cart] {
             [data-add-to-cart-text] {
                 white-space: nowrap;

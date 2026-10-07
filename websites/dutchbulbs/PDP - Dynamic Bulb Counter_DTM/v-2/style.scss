@@ -3,9 +3,6 @@ $form-wrapper: ".product-form__quantity-and-buy-buttons-wrapper";
 
 #{$body-class} {
     #{$form-wrapper} {
-        .quantity-input-wrapper__cart-count {
-            display: none;
-        }
         .quantity-input-wrapper__labels {
             flex-wrap: wrap;
         }

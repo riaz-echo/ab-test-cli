@@ -9,12 +9,9 @@
         ITEM: "ab-opt-item",
         DESKTOP: "ab-opt-desktop",
         MOBILE: "ab-opt-mobile",
-        PREORDER: "ab-opt-preorder",
+        PREORDER_MATCH: "ab-opt-preorder-match",
     };
 
-    const PREORDER_TEXT = "Preorder: Order now and shipping starts in {month}";
-    const MONTH_TOKEN = "{month}";
-    const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const QUANTITY_LABEL = "Quantity";
     const FONT_ID = "ab-opt-font";
     const FONT_HREF = "https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap";
@@ -109,40 +106,9 @@
         if (quantity.parentElement !== container) container.appendChild(quantity);
     }
 
-    function resolvePreorderText(item) {
-        if (!PREORDER_TEXT.includes(MONTH_TOKEN)) return PREORDER_TEXT;
-
-        const input = item.querySelector('input[id^="shiprange"]');
-        const parts = input && input.value ? input.value.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/) : null;
-        if (!parts) return "";
-
-        const month = MONTHS[parseInt(parts[1], 10) - 1];
-        return month ? PREORDER_TEXT.replace(MONTH_TOKEN, month) : "";
-    }
-
-  
-    function addPreorderLine(item) {
-        const info = item.querySelector(".cart__form-item-info");
-        if (!info) return;
-
-        const themeLine = [...item.querySelectorAll(PREORDER_NODES)].some((node) => node.textContent.trim().toLowerCase().includes("preorder"));
-        if (themeLine) return;
-
-        const text = resolvePreorderText(item);
-        let line = info.querySelector(`.${CLASSES.PREORDER}`);
-
-        if (!text) {
-            if (line) line.remove();
-            return;
-        }
-
-        if (!line) {
-            line = document.createElement("p");
-            line.className = `${CLASSES.PREORDER} fs-body-75 t-opacity-70`;
-        }
-
-        if (line.textContent !== text) line.textContent = text;
-        if (line.parentElement !== info || line !== info.lastElementChild) info.appendChild(line);
+    function styleShipText(item) {
+        const themeNode = [...item.querySelectorAll(PREORDER_NODES)].find((node) => node.textContent.trim());
+        if (themeNode) themeNode.classList.add(CLASSES.PREORDER_MATCH);
     }
 
     function decorateHeader(root) {
@@ -155,7 +121,7 @@
 
     function decorateItem(item) {
         movePriceBelowTitle(item);
-        addPreorderLine(item);
+        styleShipText(item);
         moveQuantityIntoPriceColumn(item);
         item.classList.add(CLASSES.ITEM);
     }
@@ -190,7 +156,7 @@
             if (!observer) observer = new MutationObserver(scheduleApply);
 
             observer.takeRecords();
-            observer.observe(document.body, { childList: true, subtree: true });
+            observer.observe(document.body, { childList: true, subtree: true, characterData: true });
         } catch (error) {}
     }
 

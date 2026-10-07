@@ -11,6 +11,9 @@
             variantInput: "#productdatalayerVariant",
             savingsHead: ".productsavingtable .optionHead > div:first-child",
             soldOut: ".product-form__cart-submit[aria-disabled='true']",
+            variantButton: ".dynamic-variant-button",
+            soldOutChip: ".dynamic-variant-button.selected.disabled",
+            uom: ".prodinfoGreenbar .prodUom",
         },
 
         limits: {
@@ -158,7 +161,40 @@
         return candidates;
     }
 
+    function getOwnText(element) {
+        return Array.from(element.childNodes)
+            .filter((node) => node.nodeType === Node.TEXT_NODE)
+            .map((node) => node.textContent)
+            .join(" ")
+            .trim();
+    }
+
+    function hasOwn(wrapper, selector) {
+        const scope = closestContaining(wrapper, selector);
+        if (!scope) return false;
+
+        const ownForm = wrapper.closest("form");
+        return Array.from(scope.querySelectorAll(selector)).some((element) => !isForeign(element, ownForm));
+    }
+
+    function isMultiSku(wrapper) {
+        return hasOwn(wrapper, CONFIG.selectors.variantButton);
+    }
+
+    function getUomPack(wrapper) {
+        const scope = closestContaining(wrapper, CONFIG.selectors.uom);
+        const uom = scope && scope.querySelector(CONFIG.selectors.uom);
+        if (!uom || isForeign(uom, wrapper.closest("form"))) return null;
+
+        return parsePack(getOwnText(uom));
+    }
+
     function getPack(wrapper) {
+        if (isMultiSku(wrapper)) return getVariantPack(wrapper);
+        return getUomPack(wrapper) || getVariantPack(wrapper);
+    }
+
+    function getVariantPack(wrapper) {
         const parsed = [];
 
         getCandidates(wrapper).forEach((candidate) => {
@@ -195,7 +231,7 @@
     }
 
     function isActive(wrapper, quantity) {
-        return quantity <= CONFIG.limits.maxQuantity && !wrapper.querySelector(CONFIG.selectors.soldOut);
+        return quantity <= CONFIG.limits.maxQuantity && !wrapper.querySelector(CONFIG.selectors.soldOut) && !hasOwn(wrapper, CONFIG.selectors.soldOutChip);
     }
 
     function removeCopy(label) {

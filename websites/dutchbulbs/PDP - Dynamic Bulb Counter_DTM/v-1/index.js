@@ -12,6 +12,8 @@
             atcButton: "[data-add-to-cart]",
             atcText: "[data-add-to-cart-text]",
             soldOut: ".product-form__cart-submit[aria-disabled='true']",
+            variantButton: ".dynamic-variant-button",
+            uom: ".prodinfoGreenbar .prodUom",
         },
 
         limits: {
@@ -160,7 +162,36 @@
         return candidates;
     }
 
+    function getOwnText(element) {
+        return Array.from(element.childNodes)
+            .filter((node) => node.nodeType === Node.TEXT_NODE)
+            .map((node) => node.textContent)
+            .join(" ")
+            .trim();
+    }
+
+    function isMultiSku(wrapper) {
+        const scope = closestContaining(wrapper, CONFIG.selectors.variantButton);
+        if (!scope) return false;
+
+        const ownForm = wrapper.closest("form");
+        return Array.from(scope.querySelectorAll(CONFIG.selectors.variantButton)).some((button) => !isForeign(button, ownForm));
+    }
+
+    function getUomPack(wrapper) {
+        const scope = closestContaining(wrapper, CONFIG.selectors.uom);
+        const uom = scope && scope.querySelector(CONFIG.selectors.uom);
+        if (!uom || isForeign(uom, wrapper.closest("form"))) return null;
+
+        return parsePack(getOwnText(uom));
+    }
+
     function getPack(wrapper) {
+        if (isMultiSku(wrapper)) return getVariantPack(wrapper);
+        return getUomPack(wrapper) || getVariantPack(wrapper);
+    }
+
+    function getVariantPack(wrapper) {
         const parsed = [];
 
         getCandidates(wrapper).forEach((candidate) => {
