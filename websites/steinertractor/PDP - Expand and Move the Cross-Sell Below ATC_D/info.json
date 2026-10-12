@@ -1,0 +1,13 @@
+{
+  "id": "1791275094012_5922_PDP___Expand_and_Move_the_Cross_Sell_Below_ATC_D",
+  "name": "PDP - Expand and Move the Cross-Sell Below ATC_D",
+  "type": "A/B",
+  "website": "steinertractor",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-10-06T08:24:54.012Z",
+  "createdAtReadable": "10/6/2026, 2:24:54 PM",
+  "lastUpdated": "2026-10-06T08:24:54.185Z"
+}

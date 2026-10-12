@@ -1,5 +1,5 @@
 (() => {
-  const ANCHOR = ".home-page-content .frame-feature";
+  const ANCHOR = ".home-page-content .products-section";
   const PREFIX = "ab-org";
 
   const ICON_ATTRS =
@@ -110,8 +110,8 @@
   function mainJs([anchor]) {
     if (document.querySelector(`.${PREFIX}`)) return;
 
-    anchor.insertAdjacentHTML("afterend", sectionHtml());
-    bindToggle(anchor.nextElementSibling);
+    anchor.insertAdjacentHTML("beforebegin", sectionHtml());
+    bindToggle(document.querySelector(`.${PREFIX}`));
     document.body.classList.add(`${PREFIX}-ready`);
   }
 
