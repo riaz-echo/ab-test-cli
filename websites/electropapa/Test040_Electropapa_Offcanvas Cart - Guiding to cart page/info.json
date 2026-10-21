@@ -1,0 +1,13 @@
+{
+  "id": "1792145077439_5485_Test040_Electropapa_Offcanvas_Cart___Guiding_to_cart_page",
+  "name": "Test040_Electropapa_Offcanvas Cart - Guiding to cart page",
+  "type": "A/B",
+  "website": "electropapa",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-10-16T10:04:37.439Z",
+  "createdAtReadable": "10/16/2026, 4:04:37 PM",
+  "lastUpdated": "2026-10-16T10:04:37.609Z"
+}

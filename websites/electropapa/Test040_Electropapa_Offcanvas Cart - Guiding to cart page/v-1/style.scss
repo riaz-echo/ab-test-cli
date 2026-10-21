@@ -1,0 +1,8 @@
+body.ab-test040 .offcanvas .offcanvas-body .offcanvas-cart-actions {
+    a.btn-link[href*="/checkout/cart"] {
+        display: none !important;
+    }
+}
+body.ab-test040 .offcanvas .offcanvas-cart-footer {
+    margin-top: 20px !important;
+}
