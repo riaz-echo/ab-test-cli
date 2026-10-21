@@ -1,0 +1,3 @@
+A green border appears at the bottom of the field when the input is valid. However, this is not appearing in the variation. Additionally, a black line appears when users start typing in the fields.
+The error message and green checkmark box appear disproportionate compared to the design. Additionally, the green checkmark icons are rendering at different sizes across different fields. Also, No checkmark box is being rendered for some fields, unlike in Test004.
+The form layout breaks below 1400px and is not responsive on smaller screens. It should remain responsive down to 992px.
