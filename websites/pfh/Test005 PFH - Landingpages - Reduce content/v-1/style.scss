@@ -1,5 +1,125 @@
 .AB-EXP-PFH-005 {
+    &.scrolled {
+        header#header {
+            @media (max-width: 768px) {
+                top: -60px !important;
+            }
+        }
+    }
+
     #page-wrapper {
+        header#header {
+            @media (max-width: 768px) {
+                display: grid;
+                background-color: #fff;
+                box-shadow: 0 3px 6px #d6d6d6;
+                grid-template-columns: auto 1fr;
+                grid-template-areas:
+                    "highlight highlight"
+                    "logo      buttons";
+            }
+
+            section.region-highlighted-header {
+                @media (max-width: 768px) {
+                    grid-area: highlight;
+                }
+            }
+
+            nav#navbar-main {
+                @media (max-width: 768px) {
+                    grid-area: logo;
+                    height: 79px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .container {
+                    @media (max-width: 768px) {
+                        padding-inline: 0px;
+                    }
+
+                    .navbar-brand {
+                        @media (max-width: 768px) {
+                            width: 80px;
+                            margin-right: 0px;
+                            height: unset;
+                        }
+
+                        img {
+                            @media (max-width: 768px) {
+                                width: 100%;
+                                object-fit: cover;
+                                object-position: calc(100% + 8px) center;
+                            }
+                        }
+                    }
+                }
+            }
+
+            nav#navbar-top {
+                @media (max-width: 768px) {
+                    height: 79px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    grid-area: buttons;
+                    flex-direction: column;
+                    gap: 12px;
+                    width: 100%;
+                    padding-right: 7px;
+                    padding-block: 0px;
+                    box-shadow: unset;
+                }
+
+                .container {
+                    .region-top-header {
+                        #block-ctacampusstudy {
+                            @media (max-width: 768px) {
+                                padding-inline: 0px;
+                            }
+
+                            ul {
+                                @media (max-width: 768px) {
+                                    transform: translateY(0px);
+                                }
+
+                                li.nav-item {
+                                    @media (max-width: 768px) {
+                                        width: calc(50% - 5px);
+                                    }
+
+                                    @media (max-width: 380px) {
+                                        width: calc(50% - 3px);
+                                    }
+
+                                    &:first-child {
+                                        @media (max-width: 768px) {
+                                            margin-right: 10px;
+                                        }
+
+                                        @media (max-width: 380px) {
+                                            margin-right: 6px;
+                                        }
+                                    }
+
+                                    & > a.nav-link {
+                                        @media (max-width: 375px) {
+                                            font-size: 11px;
+                                        }
+
+                                        @media (max-width: 365px) {
+                                            font-size: 10px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         #main-wrapper {
             @media (max-width: 1399px) {
                 padding-top: 227px;
@@ -10,7 +130,7 @@
             }
 
             @media (max-width: 768px) {
-                padding-top: 260px !important;
+                padding-top: 130px;
             }
 
             @media (min-width: 1400px) {
@@ -505,7 +625,6 @@ $content: "#{$inner-wrap} .request-info-content";
 $form: "#{$content} .webform-request-info-inner";
 
 $chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M2.57 5.79 9 12.21l6.43-6.42' fill='none' stroke='%231d1d1b' stroke-width='2.06' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-$arrow-desktop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.67 2.67 8 8l-5.33 5.33M8.67 2.67 14 8l-5.33 5.33' fill='none' stroke='%23fff' stroke-width='2.13' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 $arrow-mobile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='m2 2 4 4-4 4M6.5 2l4 4-4 4' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3E%3C/svg%3E");
 
@@ -558,9 +677,9 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 
 #{$root} .#{$p}-intro {
     .request-info-section-headline {
-        margin: 0 0 10px !important;
-        font-size: 32px !important;
-        line-height: 40px !important;
+        margin: 0 0 8px !important;
+        font-size: 30px !important;
+        line-height: 38px !important;
         font-weight: 700 !important;
         color: $navy !important;
     }
@@ -568,9 +687,9 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     .request-info-section-subline {
         display: block !important;
         height: auto !important;
-        margin: 0 0 52px !important;
-        font-size: 21px !important;
-        line-height: 30px !important;
+        margin: 0 0 32px !important;
+        font-size: 18px !important;
+        line-height: 28px !important;
         font-weight: 700 !important;
         color: $navy !important;
     }
@@ -630,8 +749,8 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 
 #{$root} .#{$p}-benefits--desktop {
     display: flow-root;
-    margin-top: 168px;
-    padding-bottom: 87px;
+    margin-top: 138px;
+    padding-bottom: 30px;
     background-color: $light-blue;
 
     .#{$p}-benefits__brochure {
@@ -648,14 +767,19 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 
     .#{$p}-benefits__item {
         align-items: center;
-        gap: 18px;
-        min-height: 54px;
-        font-size: 19px;
-        line-height: 27px;
+        gap: 14px;
+        min-height: 44px;
+        font-size: 16px;
+        line-height: 22px;
 
         & + .#{$p}-benefits__item {
-            margin-top: 24px;
+            margin-top: 18px;
         }
+    }
+
+    .#{$p}-benefits__icon {
+        width: 32px;
+        height: 24px;
     }
 }
 
@@ -718,7 +842,7 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     flex: 0 0 100% !important;
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0 0 27px !important;
+    margin: 0 0 16px !important;
 
     > label:not(.#{$p}-label) {
         display: none !important;
@@ -726,27 +850,27 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 
     .validated-mark {
         top: auto !important;
-        bottom: 19.5px;
+        bottom: 12.5px;
     }
 }
 
 #{$form} .#{$p}-label {
     position: static !important;
     display: block !important;
-    margin: 0 0 10px !important;
+    margin: 0 0 2px !important;
     padding: 0 !important;
-    font-size: 19px !important;
-    line-height: 26px !important;
+    font-size: 14px !important;
+    line-height: 22px !important;
     font-weight: 700 !important;
     color: $text !important;
 }
 
 #{$form} .#{$p}-field--first-name,
 #{$form} .#{$p}-field--last-name {
-    margin-bottom: 29px !important;
+    margin-bottom: 16px !important;
 
     .#{$p}-label {
-        margin-bottom: 8px !important;
+        margin-bottom: 2px !important;
     }
 }
 
@@ -755,7 +879,7 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     width: 100% !important;
     max-width: 100% !important;
     min-height: 0 !important;
-    height: 64px !important;
+    height: 50px !important;
     margin: 0 !important;
     border-width: 0 0 2px !important;
     border-style: solid !important;
@@ -764,7 +888,7 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     background-color: #fff;
     box-shadow: none !important;
     color: $text !important;
-    font-size: 18px !important;
+    font-size: 16px !important;
     letter-spacing: 0 !important;
 
     &.error {
@@ -774,28 +898,28 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 
 #{$form} :is(#{$valid-select}, #{$valid-input}) {
     border-color: $valid !important;
-    background-size: 28px 28px !important;
-    background-position: right 18px center !important;
+    background-size: 24px 24px !important;
+    background-position: right 16px center !important;
 }
 
 #{$form} :is(#{$valid-input}) {
-    padding-right: 64px !important;
+    padding-right: 50px !important;
 }
 
 #{$form} .form-item--error-message {
     display: block;
-    margin-top: 6px !important;
-    font-size: 14px !important;
-    line-height: 20px !important;
+    margin-top: 4px !important;
+    font-size: 13px !important;
+    line-height: 18px !important;
 }
 
 #{$form} .form-control {
-    padding: 0 26px !important;
+    padding: 0 20px !important;
     line-height: 24px !important;
 
     &::placeholder {
         color: #707070;
-        font-size: inherit !important;
+        font-size: 14px !important;
         opacity: 1;
     }
 }
@@ -805,11 +929,11 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 }
 
 #{$form} .form-select {
-    padding: 0 54px 0 26px !important;
-    background-position: right 18px center !important;
-    background-size: 18px 18px !important;
+    padding: 0 46px 0 20px !important;
+    background-position: right 16px center !important;
+    background-size: 14px 14px !important;
     background-repeat: no-repeat !important;
-    font-size: 19px !important;
+    font-size: 15px !important;
     line-height: normal !important;
 }
 
@@ -833,6 +957,10 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     #{$form} .#{$p}-field--first-name,
     #{$form} .#{$p}-field--last-name {
         margin-bottom: 9px !important;
+
+        .#{$p}-label {
+            margin-bottom: 8px !important;
+        }
     }
 
     #{$form} .#{$p}-field--email-address,
@@ -841,6 +969,7 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     }
 
     #{$form} .#{$p}-label {
+        margin-bottom: 10px !important;
         font-size: 15px !important;
         line-height: 22px !important;
     }
@@ -885,23 +1014,23 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 }
 
 #{$form} > .webform-datenschutz-wrapper {
-    margin-top: 8px !important;
+    margin-top: 4px !important;
 }
 
 #{$form} .webform-datenschutz-wrapper .form-check {
     position: relative;
     display: block;
-    min-height: 34px;
+    min-height: 23px;
     margin: 0 !important;
-    padding-left: 108px !important;
+    padding-left: 50px !important;
 
     .form-check-input {
         position: absolute;
-        top: 7px;
-        left: 6px;
+        top: 3px;
+        left: 0;
         float: none;
-        width: 24px !important;
-        height: 24px !important;
+        width: 19px !important;
+        height: 19px !important;
         margin: 0 !important;
         border: 1px solid #767676 !important;
         border-radius: 2.5px !important;
@@ -926,8 +1055,8 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
         display: block !important;
         width: auto !important;
         margin: 0 !important;
-        font-size: 17px !important;
-        line-height: 34px !important;
+        font-size: 13px !important;
+        line-height: 23px !important;
         color: $text !important;
     }
 }
@@ -963,10 +1092,10 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
         ". secure";
     align-items: center;
     column-gap: 24px;
-    row-gap: 13px;
+    row-gap: 10px;
     width: 100% !important;
     max-width: none !important;
-    margin-top: 25px !important;
+    margin-top: 24px !important;
 
     > :not(.#{$p}-required):not(.#{$p}-secure) {
         grid-area: button;
@@ -979,25 +1108,25 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     .form-actions .form-submit {
         display: inline-flex !important;
         align-items: center;
-        height: 54px !important;
+        height: 41px !important;
         margin: 0 !important;
-        padding: 0 59px 0 29px !important;
+        padding: 0 44px 0 20px !important;
         border: 0 !important;
         border-radius: 0 !important;
         background-color: $cta !important;
         color: #fff !important;
-        font-size: 19px !important;
-        line-height: 26px !important;
+        font-size: 14px !important;
+        line-height: 19px !important;
         font-weight: 700 !important;
         white-space: nowrap;
 
         &::after {
             top: 50% !important;
-            right: 29px !important;
-            width: 16px !important;
-            height: 16px !important;
-            background-image: $arrow-desktop !important;
-            background-size: 16px 16px !important;
+            right: 20px !important;
+            width: 12px !important;
+            height: 12px !important;
+            background-image: $arrow-mobile !important;
+            background-size: 12px 12px !important;
             background-repeat: no-repeat !important;
             transform: translateY(-50%);
         }
@@ -1007,8 +1136,8 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
 #{$form} .#{$p}-required {
     grid-area: required;
     margin: 0;
-    font-size: 19px;
-    line-height: 26px;
+    font-size: 15px;
+    line-height: 22px;
     color: $navy;
 }
 
@@ -1017,16 +1146,16 @@ $check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBo
     justify-self: end;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     margin: 0;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 17px;
     color: $secure;
 
     &__icon {
         flex: 0 0 auto;
-        width: 22px;
-        height: 24px;
+        width: 16.5px;
+        height: 18px;
     }
 }
 

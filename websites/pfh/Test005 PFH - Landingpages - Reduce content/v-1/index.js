@@ -469,12 +469,13 @@
     };
 
     const hasAllElements = () => {
+        const headerEl = document.querySelector("header#header");
         const heroBannerHeadlineEl = document.querySelector(".hero-banner-content .hero-banner-headline");
         const awardsSectionEl = document.querySelector('div[data-type-anchor="anchor-position--logo-teaser-1"]');
         const factBoxSectionEl = document.querySelector('div[data-type-anchor="anchor-position--fact-box-1"]');
         const formSectionEl = document.querySelector('div[data-type-anchor="anchor-position--request-information-1"]');
 
-        if (heroBannerHeadlineEl && awardsSectionEl && factBoxSectionEl && formSectionEl && document.querySelector(FORM_SEL) && document.readyState === "complete") {
+        if (headerEl && heroBannerHeadlineEl && awardsSectionEl && factBoxSectionEl && formSectionEl && document.querySelector(FORM_SEL) && document.readyState === "complete") {
             return true;
         } else {
             return false;
