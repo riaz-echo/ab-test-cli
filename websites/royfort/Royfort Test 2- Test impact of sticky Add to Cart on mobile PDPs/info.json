@@ -1,0 +1,13 @@
+{
+  "id": "1792506927335_7423_Royfort_Test_2__Test_impact_of_sticky_Add_to_Cart_on_mobile_PDPs",
+  "name": "Royfort Test 2- Test impact of sticky Add to Cart on mobile PDPs",
+  "type": "A/B",
+  "website": "royfort",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-10-20T14:35:27.335Z",
+  "createdAtReadable": "10/20/2026, 8:35:27 PM",
+  "lastUpdated": "2026-10-20T14:35:27.583Z"
+}
