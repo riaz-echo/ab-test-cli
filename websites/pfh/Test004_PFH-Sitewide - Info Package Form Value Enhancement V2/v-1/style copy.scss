@@ -1,0 +1,885 @@
+$p: "ab-t004";
+
+$navy: #133b89;
+$text: #1d1d1b;
+$orange: #ec633f;
+$cta: #e06b49;
+$line: #c9ced6;
+$blue: #3b86e0;
+$secure: #5577b9;
+$error: #bd2c2c;
+$light-blue: #eff7fc;
+$accent-bg: #fde6de;
+
+$desktop: "(min-width: 62rem)";
+$mobile: "(max-width: 61.9988rem)";
+$small: "(max-width: 389.98px)";
+
+// below 390px: scale relative to the 390 design (content column 374px = 100vw - 16px)
+@function fluid($px) {
+  @return calc(#{$px} * (100vw - 16px) / 374);
+}
+
+$root: "body.#{$p}-v1 .paragraph--type--request-information.#{$p}";
+$inner-wrap: "#{$root} .request-info-inner";
+$content: "#{$inner-wrap} .request-info-content";
+$form: "#{$content} .webform-request-info-inner";
+
+$chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M2.57 5.79 9 12.21l6.43-6.42' fill='none' stroke='%231d1d1b' stroke-width='2.06' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+$arrow-desktop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.67 2.67 8 8l-5.33 5.33M8.67 2.67 14 8l-5.33 5.33' fill='none' stroke='%23fff' stroke-width='2.13' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+$arrow-mobile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='m2 2 4 4-4 4M6.5 2l4 4-4 4' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+$knob-off-desktop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='18' cy='17' r='11' fill='%238a8c8f'/%3E%3C/svg%3E");
+$knob-on-desktop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='16' cy='17' r='11' fill='%23fff'/%3E%3C/svg%3E");
+$knob-off-mobile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 27'%3E%3Ccircle cx='14' cy='13.5' r='9' fill='%238a8c8f'/%3E%3C/svg%3E");
+$knob-on-mobile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 27'%3E%3Ccircle cx='13' cy='13.5' r='9' fill='%23fff'/%3E%3C/svg%3E");
+$check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3E%3C/svg%3E");
+
+/* --------------------------------------------------------------------------
+   Layout: content column + benefit aside
+   -------------------------------------------------------------------------- */
+
+#{$root} .request-info-section-help-text {
+  display: none !important;
+}
+
+// site fills svg paths — icons here are stroke-only
+#{$root} .#{$p}-benefits__icon,
+#{$root} .#{$p}-benefits__icon *,
+#{$root} .#{$p}-secure__icon,
+#{$root} .#{$p}-secure__icon * {
+  fill: none !important;
+}
+
+@media #{$desktop} {
+  #{$content} {
+    margin-right: 64px !important;
+  }
+
+  #{$inner-wrap} .request-info-media {
+    display: block !important;
+    flex: 0 0 400px !important;
+    width: 400px !important;
+    max-width: 400px !important;
+  }
+
+  #{$inner-wrap} .request-info-media .request-info-brochure {
+    display: none !important;
+  }
+}
+
+@media #{$mobile} {
+  // design column is 374px at 390 (site: 366px) — bleed 4px each side
+  #{$content} {
+    width: calc(100% + 8px) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 -4px !important;
+  }
+
+  #{$inner-wrap} .request-info-media {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Intro: headline + subline (+ benefit box on mobile)
+   -------------------------------------------------------------------------- */
+
+#{$root} .#{$p}-intro {
+  .request-info-section-headline {
+    margin: 0 0 10px !important;
+    font-size: 32px !important;
+    line-height: 40px !important;
+    font-weight: 700 !important;
+    color: $navy !important;
+  }
+
+  .request-info-section-subline {
+    display: block !important;
+    height: auto !important;
+    margin: 0 0 52px !important;
+    font-size: 21px !important;
+    line-height: 30px !important;
+    font-weight: 700 !important;
+    color: $navy !important;
+  }
+
+  @media (min-width: 87.5rem) {
+    .request-info-section-headline {
+      white-space: nowrap;
+    }
+  }
+
+  @media #{$mobile} {
+    margin: 0 -1px 30px;
+    padding: 17px 14px 16px;
+    background-color: $light-blue;
+
+    .request-info-section-headline {
+      margin: 0 0 6px !important;
+      font-size: 22px !important;
+      line-height: 28px !important;
+    }
+
+    .request-info-section-subline {
+      margin: 0 0 14px !important;
+      font-size: 14px !important;
+      line-height: 20px !important;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Benefits (shared)
+   -------------------------------------------------------------------------- */
+
+#{$root} .#{$p}-benefits {
+  position: relative;
+
+  &__brochure {
+    display: block;
+    max-width: none;
+    object-fit: contain;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    color: $navy;
+    font-weight: 700;
+
+    &::before,
+    &::marker {
+      content: none;
+    }
+  }
+
+  &__icon {
+    flex: 0 0 auto;
+    color: #5caa4f;
+  }
+
+  &__item--accent {
+    background-color: $accent-bg;
+
+    .#{$p}-benefits__icon {
+      color: $orange;
+    }
+  }
+
+  &__accent {
+    color: $orange;
+  }
+}
+
+#{$root} .#{$p}-badge {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: $orange;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  transform: rotate(-8deg);
+
+  &__value,
+  &__text {
+    display: block;
+    white-space: nowrap;
+  }
+}
+
+/* Desktop aside */
+#{$root} .#{$p}-benefits--desktop {
+  display: flow-root;
+  margin-top: 168px;
+  padding-bottom: 9px;
+  background-color: $light-blue;
+
+  .#{$p}-benefits__brochure {
+    width: 320px;
+    height: 445px;
+    margin: -58px 0 0 40px;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.25));
+  }
+
+  .#{$p}-badge {
+    top: -116px;
+    left: 284px;
+    width: 128px;
+    height: 128px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &__value {
+      font-size: 34px;
+      line-height: 36px;
+    }
+
+    &__text {
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+
+  .#{$p}-benefits__list {
+    margin-top: 9px;
+    padding: 0 20px 0 30px;
+  }
+
+  .#{$p}-benefits__item {
+    align-items: center;
+    gap: 18px;
+    min-height: 54px;
+    font-size: 19px;
+    line-height: 27px;
+
+    & + .#{$p}-benefits__item {
+      margin-top: 18px;
+    }
+  }
+
+  .#{$p}-benefits__item--accent {
+    min-height: 74px;
+    margin: 22px -14px 0 !important;
+    padding: 10.5px 14px;
+  }
+}
+
+/* Mobile box */
+#{$root} .#{$p}-benefits--mobile {
+  display: flex;
+  gap: 24px;
+  padding-top: 15px;
+  border-top: 1px solid #cfe3f3;
+
+  .#{$p}-benefits__brochure {
+    flex: 0 0 78px;
+    width: 78px;
+    height: 108px;
+    filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.25));
+  }
+
+  .#{$p}-badge {
+    top: 2px;
+    left: 38px;
+    width: 58px;
+    height: 58px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    &__value {
+      font-size: 15px;
+      line-height: 16px;
+    }
+
+    &__text {
+      font-size: 8.5px;
+      line-height: 11px;
+    }
+  }
+
+  .#{$p}-benefits__list {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .#{$p}-benefits__item {
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    line-height: 17px;
+
+    & + .#{$p}-benefits__item {
+      margin-top: 6px;
+    }
+  }
+
+  .#{$p}-benefits__icon {
+    margin-top: 3px;
+  }
+
+  .#{$p}-benefits__item--accent {
+    margin: 8px -8px 0 !important;
+    padding: 6px 8px;
+  }
+
+  @media #{$desktop} {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Fields: label above, full width
+   -------------------------------------------------------------------------- */
+
+// site adds 8px / 24px below each wrapper — spacing below comes from the design only
+#{$form} > div {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#{$form} .webform-course-list-and-session-wrapper > div,
+#{$form} .webform-receive-info-package-wrapper > div {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#{$form} .webform-receive-info-package-wrapper > div {
+  display: flex !important;
+  flex-direction: column;
+}
+
+#{$form} .#{$p}-field {
+  position: relative;
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 27px !important;
+
+  > label:not(.#{$p}-label) {
+    display: none !important;
+  }
+
+  .validated-mark {
+    top: auto !important;
+    bottom: 19.5px;
+  }
+}
+
+#{$form} .#{$p}-label {
+  position: static !important;
+  display: block !important;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  font-size: 19px !important;
+  line-height: 26px !important;
+  font-weight: 700 !important;
+  color: $text !important;
+}
+
+#{$form} .#{$p}-field--first-name,
+#{$form} .#{$p}-field--last-name {
+  margin-bottom: 29px !important;
+
+  .#{$p}-label {
+    margin-bottom: 8px !important;
+  }
+}
+
+#{$form} .form-control,
+#{$form} .form-select {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  height: 64px !important;
+  margin: 0 !important;
+  border-width: 0 0 2px !important;
+  border-style: solid !important;
+  border-color: $line !important;
+  border-radius: 0 !important;
+  background-color: #fff;
+  box-shadow: none !important;
+  color: $text !important;
+  font-size: 18px !important;
+  letter-spacing: 0 !important;
+
+  &:focus {
+    border-color: #707070 !important;
+  }
+
+  &.error {
+    border-color: $error !important;
+  }
+}
+
+#{$form} .form-control {
+  padding: 0 26px !important;
+  line-height: 24px !important;
+
+  &::placeholder {
+    color: #707070;
+    font-size: inherit !important;
+    opacity: 1;
+  }
+}
+
+#{$form} .form-select {
+  padding: 0 54px 0 26px !important;
+  background-image: $chevron !important;
+  background-position: right 18px center !important;
+  background-size: 18px 18px !important;
+  background-repeat: no-repeat !important;
+  font-size: 19px !important;
+  line-height: normal !important;
+}
+
+#{$form} .webform-whatsapp-wrapper {
+  display: none !important;
+}
+
+@media #{$mobile} {
+  #{$form} .#{$p}-field {
+    margin-bottom: 10px !important;
+
+    .validated-mark {
+      bottom: 12.5px;
+    }
+  }
+
+  #{$form} .#{$p}-field--first-name,
+  #{$form} .#{$p}-field--last-name {
+    margin-bottom: 9px !important;
+  }
+
+  #{$form} .#{$p}-field--email-address,
+  #{$form} .#{$p}-field--telephone-number {
+    margin-bottom: 8px !important;
+  }
+
+  #{$form} .#{$p}-label {
+    font-size: 15px !important;
+    line-height: 22px !important;
+  }
+
+  // typed text stays 16px like control (iOS zooms into inputs below 16px), placeholder is the design's 14px
+  #{$form} .form-control {
+    height: 50px !important;
+    padding: 0 20px !important;
+    font-size: 16px !important;
+
+    &::placeholder {
+      color: #757575;
+      font-size: 14px !important;
+    }
+  }
+
+  #{$form} .form-select {
+    height: 48px !important;
+    padding: 0 46px 0 20px !important;
+    background-position: right 16px center !important;
+    background-size: 14px 14px !important;
+    font-size: 14px !important;
+  }
+
+  #{$form} .form-type-select .validated-mark {
+    bottom: 11.5px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Toggles (Post, E-Campus) + Datenschutz checkbox
+   -------------------------------------------------------------------------- */
+
+#{$form} > .webform-receive-info-package-wrapper {
+  margin-top: 8px !important;
+}
+
+#{$form} .webform-address-wrapper .request-info-address {
+  margin-top: 20px;
+  margin-bottom: 0 !important;
+}
+
+#{$form} > .webform-request-test-access-wrapper {
+  margin-top: 20px !important;
+}
+
+#{$form} > .webform-datenschutz-wrapper {
+  margin-top: 15px !important;
+}
+
+#{$form} .webform-receive-info-package-wrapper .form-check,
+#{$form} .webform-request-test-access-wrapper .form-check {
+  position: relative;
+  display: block;
+  min-height: 34px;
+  margin: 0 !important;
+  padding-left: 104px !important;
+
+  .form-check-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    float: none;
+    width: 68px !important;
+    height: 34px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 17px !important;
+    background-color: #fff !important;
+    background-image: $knob-off-desktop !important;
+    background-position: left center !important;
+    background-size: 34px 34px !important;
+    background-repeat: no-repeat !important;
+    cursor: pointer;
+
+    &:checked {
+      background-color: $blue !important;
+      background-image: $knob-on-desktop !important;
+      background-position: right center !important;
+    }
+  }
+
+  .form-check-label {
+    display: block !important;
+    width: auto !important;
+    margin: 4px 0 0 !important;
+    font-size: 17px !important;
+    line-height: 26px !important;
+    color: $text !important;
+  }
+}
+
+#{$form} .webform-datenschutz-wrapper .form-check {
+  position: relative;
+  display: block;
+  min-height: 34px;
+  margin: 0 !important;
+  padding-left: 108px !important;
+
+  .form-check-input {
+    position: absolute;
+    top: 7px;
+    left: 6px;
+    float: none;
+    width: 24px !important;
+    height: 24px !important;
+    margin: 0 !important;
+    border: 1px solid #767676 !important;
+    border-radius: 2.5px !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    cursor: pointer;
+
+    &:checked {
+      border-color: $blue !important;
+      background-color: $blue !important;
+      background-image: $check !important;
+      background-position: center !important;
+      background-size: 100% 100% !important;
+    }
+
+    &.error {
+      border-color: $error !important;
+    }
+  }
+
+  .form-check-label {
+    display: block !important;
+    width: auto !important;
+    margin: 0 !important;
+    font-size: 17px !important;
+    line-height: 34px !important;
+    color: $text !important;
+  }
+}
+
+@media #{$mobile} {
+  #{$form} > .webform-receive-info-package-wrapper {
+    margin-top: 5px !important;
+  }
+
+  #{$form} .webform-address-wrapper .request-info-address {
+    margin-top: 14px;
+  }
+
+  // E-Campus row is 46px in the design (label sits 2px lower than the 27px toggle)
+  #{$form} > .webform-datenschutz-wrapper {
+    margin-top: 12px !important;
+  }
+
+  #{$form} .webform-receive-info-package-wrapper .form-check,
+  #{$form} .webform-request-test-access-wrapper .form-check {
+    min-height: 27px;
+    padding-left: 78px !important;
+
+    .form-check-input {
+      width: 53px !important;
+      height: 27px !important;
+      border-radius: 14px !important;
+      background-image: $knob-off-mobile !important;
+      background-size: 27px 27px !important;
+
+      &:checked {
+        background-image: $knob-on-mobile !important;
+      }
+    }
+
+    .form-check-label {
+      margin-top: 2px !important;
+      font-size: 13px !important;
+      line-height: 23px !important;
+    }
+  }
+
+  #{$form} .webform-datenschutz-wrapper .form-check {
+    min-height: 23px;
+    padding-left: 79px !important;
+
+    .form-check-input {
+      top: 3px;
+      left: 0;
+      width: 19px !important;
+      height: 19px !important;
+    }
+
+    .form-check-label {
+      font-size: 13px !important;
+      line-height: 23px !important;
+    }
+  }
+}
+
+#{$form} .actions-wrapper {
+  display: grid !important;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "required button"
+    ". secure";
+  align-items: center;
+  column-gap: 24px;
+  row-gap: 13px;
+  width: 100% !important;
+  max-width: none !important;
+  margin-top: 25px !important;
+
+  > :not(.#{$p}-required):not(.#{$p}-secure) {
+    grid-area: button;
+  }
+
+  .form-actions {
+    margin: 0 !important;
+  }
+
+  .form-actions .form-submit {
+    display: inline-flex !important;
+    align-items: center;
+    height: 54px !important;
+    margin: 0 !important;
+    padding: 0 59px 0 29px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background-color: $cta !important;
+    color: #fff !important;
+    font-size: 19px !important;
+    line-height: 26px !important;
+    font-weight: 700 !important;
+    white-space: nowrap;
+
+    &::after {
+      top: 50% !important;
+      right: 29px !important;
+      width: 16px !important;
+      height: 16px !important;
+      background-image: $arrow-desktop !important;
+      background-size: 16px 16px !important;
+      background-repeat: no-repeat !important;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+#{$form} .#{$p}-required {
+  grid-area: required;
+  margin: 0;
+  font-size: 19px;
+  line-height: 26px;
+  color: $navy;
+}
+
+#{$form} .#{$p}-secure {
+  grid-area: secure;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: $secure;
+
+  &__icon {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 24px;
+  }
+}
+
+@media #{$mobile} {
+  #{$form} .actions-wrapper {
+    grid-template-areas:
+      "button button"
+      "required secure";
+    column-gap: 12px;
+    row-gap: 16px;
+    margin-top: 38px !important;
+
+    > :not(.#{$p}-required):not(.#{$p}-secure) {
+      justify-self: end;
+    }
+
+    .form-actions .form-submit {
+      height: 41px !important;
+      padding: 0 48px 0 26px !important;
+      font-size: 14px !important;
+      line-height: 19px !important;
+
+      &::after {
+        right: 26px !important;
+        width: 12px !important;
+        height: 12px !important;
+        background-image: $arrow-mobile !important;
+        background-size: 12px 12px !important;
+      }
+    }
+  }
+
+  #{$form} .#{$p}-required {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  #{$form} .#{$p}-secure {
+    gap: 6px;
+    font-size: 11px;
+    line-height: 16px;
+
+    &__icon {
+      width: 16.5px;
+      height: 18px;
+    }
+  }
+}
+
+@media #{$small} {
+  #{$root} .#{$p}-intro {
+    padding: fluid(17) fluid(14) fluid(16);
+
+    .request-info-section-headline {
+      margin-bottom: fluid(6) !important;
+      font-size: fluid(22) !important;
+      line-height: fluid(28) !important;
+    }
+
+    .request-info-section-subline {
+      margin-bottom: fluid(14) !important;
+      font-size: fluid(14) !important;
+      line-height: fluid(20) !important;
+    }
+  }
+
+  #{$root} .#{$p}-benefits--mobile {
+    gap: fluid(24);
+    padding-top: fluid(15);
+
+    .#{$p}-benefits__brochure {
+      flex-basis: fluid(78);
+      width: fluid(78);
+      height: fluid(108);
+    }
+
+    .#{$p}-badge {
+      top: fluid(2);
+      left: fluid(38);
+      width: fluid(58);
+      height: fluid(58);
+
+      &__value {
+        font-size: fluid(15);
+        line-height: fluid(16);
+      }
+
+      &__text {
+        font-size: fluid(8.5);
+        line-height: fluid(11);
+      }
+    }
+
+    .#{$p}-benefits__item {
+      gap: fluid(8);
+      font-size: fluid(12.5);
+      line-height: fluid(17);
+
+      & + .#{$p}-benefits__item {
+        margin-top: fluid(6);
+      }
+    }
+
+    .#{$p}-benefits__icon {
+      width: fluid(18);
+      height: fluid(14);
+      margin-top: fluid(3);
+    }
+
+    .#{$p}-benefits__item--accent {
+      margin: fluid(8) fluid(-8) 0 !important;
+      padding: fluid(6) fluid(8);
+    }
+  }
+
+  #{$form} .#{$p}-label {
+    font-size: fluid(15) !important;
+    line-height: fluid(22) !important;
+  }
+
+  #{$form} .form-control::placeholder {
+    font-size: fluid(14) !important;
+  }
+
+  #{$form} .form-select {
+    font-size: fluid(14) !important;
+  }
+
+  #{$form} .webform-receive-info-package-wrapper .form-check .form-check-label,
+  #{$form} .webform-request-test-access-wrapper .form-check .form-check-label,
+  #{$form} .webform-datenschutz-wrapper .form-check .form-check-label {
+    font-size: fluid(13) !important;
+    line-height: fluid(23) !important;
+  }
+
+  #{$form} .actions-wrapper .form-actions .form-submit {
+    padding: 0 fluid(48) 0 fluid(26) !important;
+    font-size: fluid(14) !important;
+
+    &::after {
+      right: fluid(26) !important;
+    }
+  }
+
+  #{$form} .#{$p}-required {
+    font-size: fluid(15);
+    line-height: fluid(22);
+  }
+
+  #{$form} .#{$p}-secure {
+    gap: fluid(6);
+    font-size: fluid(11);
+    line-height: fluid(16);
+
+    &__icon {
+      width: fluid(16.5);
+      height: fluid(18);
+    }
+  }
+}
+
+
+// test 004
+body.#{$p}-v1 .paragraph--type--request-information .request-info-inner .request-info-content .webform-request-info-inner .webform-address-wrapper .request-info-address {
+  display: block !important;
+}
