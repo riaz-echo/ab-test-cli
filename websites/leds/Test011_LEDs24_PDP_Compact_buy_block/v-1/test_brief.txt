@@ -1,0 +1,80 @@
+The Original design is shown with a red background. The Variation is shown with a green background in the Figma file.
+Description
+This test makes the buy block on the product detail page more compact so that the configurator, the price and the "In den Warenkorb" button are reached with less scrolling. The space between the header and the page content is reduced, the article number moves to the bottom of the buy block, the product benefits are shown in a two-column grid, the configurator is grouped in a light grey box, and several elements of the buy block are tightened. On Mobile, the search bar in the header is removed. All changes described below apply only to the Variation. Anything not mentioned remains unchanged.
+1. Reduced spacing between header and page content
+In the Original (Desktop), there is an empty white strip between the black header and the main navigation bar. On Desktop and Mobile, there is a large vertical gap between the navigation and the breadcrumb ("Home / LED-Streifen") and between the breadcrumb and the product gallery / buy block.
+In the Variation, the space between header and page content is reduced.
+Desktop: the empty white strip between the header and the main navigation bar is removed, so the navigation sits directly below the header.
+Desktop and Mobile: the spacing above and below the breadcrumb is reduced to a compact margin.
+On Mobile, the breadcrumb is aligned flush with the left edge of the page content (same left alignment as the product title).
+
+2. Search bar removed from the header (Mobile only)
+In the Original (Mobile), the header contains a second row below the logo and icons with the search field "Suchbegriff / Artikel Nr. eingeben".
+In the Variation (Mobile), the search field row is removed from the header. The header only consists of the top bar and the row with logo and icons. The page content moves up accordingly. On Desktop, the search field remains unchanged.
+
+3. Article number moved to the bottom of the buy block
+In the Original, the article number "Art.-Nr.: COB20-N-001" is shown directly below the product title and subtitle, above the list of product benefits.
+In the Variation, the article number is removed from below the title and placed at the very bottom of the buy block, below the four service boxes ("Lieferzeit", "Persönliche Fachberatung", "Maßgefertigt", "Anschlussbereit"). It is shown in a smaller font size and in grey. The product benefits now follow directly below the product subtitle. This applies to Desktop and Mobile.
+
+4. Product benefits with checkmarks shown in a two-column grid
+In the Original, the six product benefits are shown as a single-column list with large checkmark icons and generous line spacing: "Länge: Zuschnitt auf Maß in 5 cm Abständen", "Lichtfarbe: Warmweiß, 2700 K", "maximale Streifenlänge: 500 cm (selbstklebend)", "Lichtleistung: 1200 Lumen / 12 W pro Meter", "konfigurierbare Bauteile: Anschluss- und Verbindungskabel", "optionale Ergänzungen: Netzteile und Controllersets". On Mobile, most items wrap onto two lines.
+In the Variation, the benefits are shown in a two-column grid (three rows of two items) with smaller checkmark icons and shorter texts. The spacing above and below the list is reduced.
+Desktop texts: "Zuschnitt in 5-cm-Schritten", "Warmweiß, 2700 K", "Bis 500 cm, selbstklebend", "1200 lm / 12 W pro Meter", "Anschlusskabel konfigurierbar", "Netzteil & Controller optional".
+Mobile texts: "5-cm-Zuschnitt", "Warmweiß, 2700 K", "Bis 5 m, selbstklebend", "1200 lm / 12 W pro m", "Kabel nach Wahl", "Netzteil & Controller optional".
+Mobile only: the grid is placed inside a light grey card with rounded corners and inner padding. The text size is smaller than on Desktop. Each checkmark is vertically aligned with the first line of its text.
+Desktop: no background card; the grid sits directly below the product subtitle.
+The shortened texts in Figma refer to the example product. As the benefit texts differ per product, please align with us how the texts are handled on other product pages before implementation (see Implementation Notes).
+
+5. Configurator grouped in a light grey box with new heading
+In the Original, the configurator sections "Auswahl individuelle Wunschlänge", "Anschluss zum Netzteil/Controller", "Verbindung zu weiterem LED-Streifen" and the info note below them are shown on a white background without a heading of their own.
+In the Variation, these elements are grouped inside a box with the background color #F3F6F8. The box starts with the new heading "Ihr Produkt konfigurieren" (bold, larger than the section headings).
+Content of the box, in this order: heading "Ihr Produkt konfigurieren", "Auswahl individuelle Wunschlänge" with the dropdown, "Anschluss zum Netzteil/Controller" with its option tiles, "Verbindung zu weiterem LED-Streifen" with its option tiles, the info note about the pre-mounted cables.
+The box ends after the info note. "Empfohlene Ergänzungen", the total price and the add-to-cart row are outside the box.
+The option tiles inside the box have a white background so they stand out from the grey box.
+Desktop: the box spans the full width of the buy block column and extends slightly beyond the content on the left and right; the content inside keeps its original alignment.
+Mobile: the box spans the full viewport width; the content inside keeps the regular side padding.
+
+6. Option tiles in the configurator made more compact
+In the Original, the option tiles in "Anschluss zum Netzteil/Controller" and "Verbindung zu weiterem LED-Streifen" are relatively tall, with a large product image and generous vertical spacing between the rows. On Mobile, the tile labels (e.g. "Plug & Play schwarz | 20 cm (2,95 €)") wrap onto three to four lines.
+In the Variation, the tiles keep their two-column arrangement and their selection logic, but are lower, with a smaller product image and less spacing between the rows. The selected state (blue border and checkmark badge) remains unchanged.
+Desktop: the label keeps its content and is shown on two lines in a smaller font, e.g. "Offen weiß | 100 cm" / "(2,45 €)".
+Mobile: the label is split into two lines: line 1 shows the cable name, line 2 shows length and price in grey, separated by a middle dot, e.g. "Plug & Play schwarz" / "20 cm · 2,95 €". The option "ohne Kabel (0,00 €)" becomes "ohne Kabel" / "0,00 €".
+This applies to both configurator sections.
+
+7. Info note below the configurator shortened
+In the Original, the info note reads: "Sie erhalten ein anschlussbereites Produkt - Ihre ausgewählten Kabel werden direkt am LED-Streifen montiert."
+In the Variation, the info note reads: "Anschlussfertig geliefert: Ihre gewählten Kabel werden direkt am Streifen montiert." The font size is slightly smaller. The info icon remains. This applies to Desktop and Mobile.
+
+8. Quantity selector moved next to the add-to-cart button, first price row removed
+In the Original, a row with the quantity selector ("–  1  +") on the left and the price "1,04 €" on the right, followed by "Preise inkl. MwSt. zzgl. Versandkosten", is shown directly below the configurator. The same price is shown again further down as "Gesamtpreis". The "In den Warenkorb" button spans the full width of the buy block.
+In the Variation, the quantity selector is placed on the left of the "In den Warenkorb" button in the same row. The quantity selector has the same height as the button, and the button takes up the remaining width. The original row with quantity selector, price and "Preise inkl. MwSt. zzgl. Versandkosten" below the configurator is removed. The price is shown only once, in the "Gesamtpreis" area. This applies to Desktop and Mobile.
+
+9. "Empfohlene Ergänzungen" section tightened
+In the Original, the section starts with the heading "Empfohlene Ergänzungen", followed by the text "Wählen Sie bei Bedarf weiteres Zubehör und Komponenten aus unserer Empfehlung aus." and four accordion items ("Netzteile (bis 3 m Streifen)", "Netzteile (bis 5 m Streifen)", "Fernbedienung & Controller", "Kabel & Verlängerungen") with large spacing.
+In the Variation, the section is more compact. Accordion behaviour and items are unchanged.
+The heading "Empfohlene Ergänzungen" is shown in a smaller font size, with less spacing above it.
+The intro text is replaced with: "Optional: passendes Zubehör direkt mitbestellen." (smaller font size).
+The four accordion items are lower, with less spacing between them. The accordion labels are slightly smaller and the chevron icons are vertically centred with the label.
+This applies to Desktop and Mobile.
+
+10. Total price area tightened
+In the Original, the "Gesamtpreis" label and the price are shown in a very large font size, with additional spacing above them.
+In the Variation, "Gesamtpreis" and the price are shown in a smaller font size and with less spacing above. The label is aligned left and the price is aligned right. The row "konfigurierter Artikel" with its price and the link "Preise inkl. MwSt. zzgl. Versandkosten" remain unchanged. This applies to Desktop and Mobile.
+
+11. Service boxes reduced in height
+In the Original, the four service boxes below the payment logos ("Lieferzeit: ca. 3-5 Werktage", "Persönliche Fachberatung", "Maßgefertigt in Deutschland", "Anschlussbereit geliefert") are shown in a 2 × 2 grid with a lot of vertical padding.
+In the Variation, the 2 × 2 grid and the content of the boxes remain the same, but the boxes are lower, with reduced vertical padding. Icon and text are vertically centred in each box. This applies to Desktop and Mobile.
+
+12. Reduced spacing within the buy block
+In the Original, there is large vertical spacing between the individual parts of the buy block (social proof banner, title, benefits, configurator sections, "Empfohlene Ergänzungen", total price, add-to-cart row).
+In the Variation, the vertical spacing between these parts is reduced throughout the buy block, so the add-to-cart button moves noticeably higher on the page. Please follow the spacing in the Figma file. This applies to Desktop and Mobile.
+Implementation Notes
+
+All changes are implemented via Varify as a client-side variation. No server-side changes required.
+The Variation targets both Desktop and Mobile viewports. Tablet is excluded.
+Viewport-specific changes are explicitly marked in the change descriptions above (Mobile: search bar removed, benefit card, two-line tile labels).
+Where elements are removed or hidden in the Variation (Mobile search bar, quantity/price row below the configurator, article number below the title), the surrounding spacing should collapse so no empty gap remains.
+All existing functionality must remain intact: length dropdown, option tile selection, quantity selector (now next to the add-to-cart button), price updates, accordions in "Empfohlene Ergänzungen" and the add-to-cart action.
+Product benefit texts: the shortened texts in Figma are examples for this product. Please align with us before implementation whether the original benefit texts are kept dynamically (layout change only) or replaced via a mapping.
+Mobile option tile labels: the split into name and "length · price" should be derived from the existing label pattern "Name | Länge (Preis)" so it works for all products with a configurator.
+The Figma file contains the complete design reference for both Original (red background section) and Variation (green background section) on the same page.
