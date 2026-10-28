@@ -3,6 +3,7 @@
   const PREFIX = "ab-t004";
   const SECTION_SEL = ".paragraph--type--request-information";
   const FORM_SEL = `${SECTION_SEL} .request-info-inner form`;
+  const CAMPUS_CLASS = "page-target-group--campus";
 
   const BROCHURE_FALLBACK = "/sites/default/files/styles/brochure/public/2021-08/brochure.png.webp?h=795e9ced&itok=nF4VGaj6";
   const BROCHURE_ALT = "Infobroschüre „Dein Weg – dein Studium“ der PFH";
@@ -131,7 +132,7 @@
       if (!studyType.querySelector(`.${PREFIX}-label`)) {
         studyType.insertAdjacentHTML("afterbegin", `<span class="${PREFIX}-label">${STUDY_TYPE_LABEL}</span>`);
       }
-    } else {
+    } else if (!document.body.classList.contains(CAMPUS_CLASS)) {
       const courseWrapper = inner.querySelector(".webform-course-list-and-session-wrapper");
       if (courseWrapper && inner.firstElementChild !== courseWrapper) inner.prepend(courseWrapper);
     }
