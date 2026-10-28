@@ -8,6 +8,10 @@
             optionLabel: ".swp-productoptions-product--group__optionsWrapper .form-check.option-image .productoptions-info-section label.form-check-label",
             infoText: ".swp-productoptions-product--section-required-info > div",
             recoHeading: "#swp-productoptions--input-wrapper > .mt-4",
+            qtyContainer: ".k2p-quantity-price-container",
+            qtyField: "[data-quantity-field]",
+            buyRow: "#productDetailPageBuyProductForm .buy-widget-container",
+            totals: ".js-accesories-totals-without-bundle",
         },
         classes: {
             body: "ab-t011-v1",
@@ -16,6 +20,8 @@
             opt: "ab-t011-opt",
             recoHeading: "ab-t011-reco-heading",
             recoText: "ab-t011-reco-text",
+            optWrap: "ab-t011-opt--wrap",
+            qtyMoved: "ab-t011-qty-moved",
         },
         texts: {
             info: "Anschlussfertig geliefert: Ihre gewählten Kabel werden direkt am Streifen montiert.",
@@ -84,6 +90,7 @@
             if (option.size) {
                 name.appendChild(el("span", `${c}__desk`, ` | ${option.size}`));
                 meta.appendChild(el("span", `${c}__mob`, `${option.size} · `));
+                meta.appendChild(el("span", `${c}__size`, `${option.size} `));
             }
             meta.appendChild(el("span", `${c}__desk`, `(${option.price})`));
             meta.appendChild(el("span", `${c}__mob`, option.price));
@@ -92,6 +99,32 @@
             label.textContent = "";
             label.appendChild(box);
         });
+    }
+
+    function updateOptionWraps(buy) {
+        const desktop = window.matchMedia("(min-width: 768px)").matches;
+
+        buy.querySelectorAll(`.${CONFIG.classes.opt}`).forEach((box) => {
+            box.classList.remove(CONFIG.classes.optWrap);
+            if (!desktop || !box.querySelector(`.${CONFIG.classes.opt}__size`)) return;
+            const name = box.querySelector(`.${CONFIG.classes.opt}__name`);
+            const lineHeight = parseFloat(getComputedStyle(name).lineHeight) || 18;
+            if (name.offsetHeight > lineHeight * 1.5) box.classList.add(CONFIG.classes.optWrap);
+        });
+    }
+
+    function renderQuantity(buy) {
+        const container = buy.querySelector(CONFIG.selectors.qtyContainer);
+        const row = buy.querySelector(CONFIG.selectors.buyRow);
+        const buyCol = row && row.querySelector(":scope > .col-12");
+        if (!container || !buyCol || !buy.querySelector(CONFIG.selectors.totals)) return;
+
+        const field = container.querySelector(CONFIG.selectors.qtyField);
+        if (field) row.insertBefore(field, buyCol);
+        container.classList.add(CONFIG.classes.qtyMoved);
+        if (container.nextElementSibling && container.nextElementSibling.querySelector(".product-detail-tax-container")) {
+            container.nextElementSibling.classList.add(CONFIG.classes.qtyMoved);
+        }
     }
 
     function renderTexts(buy) {
@@ -103,10 +136,26 @@
         const heading = buy.querySelector(CONFIG.selectors.recoHeading);
         if (heading) heading.classList.add(CONFIG.classes.recoHeading);
         const intro = heading && heading.querySelector("h3") && heading.nextElementSibling;
-        if (intro && intro.tagName === "P" && intro.textContent.trim() !== CONFIG.texts.reco) {
-            intro.textContent = CONFIG.texts.reco;
+        if (intro && intro.tagName === "P") {
             intro.classList.add(CONFIG.classes.recoText);
+            if (intro.textContent.trim() !== CONFIG.texts.reco) intro.textContent = CONFIG.texts.reco;
         }
+    }
+
+    function initTaxModals(buy) {
+        const pm = window.PluginManager;
+        if (!pm || typeof pm.initializePlugin !== "function") return;
+
+        buy.querySelectorAll("a.product-detail-tax-link[data-ajax-modal]").forEach((link) => {
+            let instance = null;
+            try {
+                instance = pm.getPluginInstanceFromElement(link, "AjaxModal");
+            } catch (e) {}
+            if (instance) return;
+            try {
+                pm.initializePlugin("AjaxModal", link);
+            } catch (e) {}
+        });
     }
 
     function render() {
@@ -115,7 +164,10 @@
 
         renderOrderNumber(buy);
         renderOptionLabels(buy);
+        updateOptionWraps(buy);
         renderTexts(buy);
+        renderQuantity(buy);
+        initTaxModals(buy);
     }
 
     function observe() {
@@ -139,6 +191,15 @@
 
         render();
         observe();
+
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const buy = document.querySelector(CONFIG.selectors.buy);
+                if (buy) updateOptionWraps(buy);
+            }, 150);
+        });
     }
 
     waitForElem(CONFIG.selectors.buy, mainJs);
