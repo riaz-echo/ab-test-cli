@@ -135,211 +135,17 @@ $xs: 575.98px;
             }
         }
 
-        .product-detail-form-container:has(.k2p-quantity-price-fake-container) {
-            display: flex;
-            flex-wrap: wrap;
-            column-gap: 12px;
+        .k2p-basic-configuration-wrapper.swp-productoptions-product--sections-required-buy-widget-price {
+            padding-bottom: 24px;
 
             @media (max-width: $mobile) {
-                column-gap: 10px;
+                padding-bottom: 20px;
             }
-
-            #swp-productoptions--container-wrapper,
-            #swp-productoptions--input-wrapper,
-            .k2p-basic-configuration-wrapper.swp-productoptions-product--sections-required-buy-widget-price,
-            .k2p-quantity-price-fake-container,
-            .k2p-quantity-price-fake-container .d-flex.justify-content-between,
-            #productDetailPageBuyProductForm,
-            #productDetailPageBuyProductForm .buy-widget-container {
-                display: contents !important;
-            }
-
-            .ab-t011-reco-heading,
-            .ab-t011-reco-text,
-            #accordionOptionsOptional,
-            #swp-productoptions--result-wrapper,
-            .huebert-accessories-container {
-                flex: 0 0 100%;
-                min-width: 0;
-            }
-
-            .ab-t011-reco-heading,
-            .ab-t011-reco-text,
-            #accordionOptionsOptional {
-                order: 2;
-            }
-
-            #swp-productoptions--result-wrapper {
-                order: 3;
-            }
-
-            .huebert-accessories-container {
-                order: 4;
-            }
-
-            .swp-productoptions-product--sections-required-wrapper {
-                order: 1;
-                flex: 0 0 calc(100% + 40px);
-                margin: -20px -20px 0;
-                padding: 0 20px 24px;
-                background: #f4f6f8;
-
-                @media (max-width: $mobile) {
-                    padding-bottom: 20px;
-                }
-            }
-
-            .k2p-quantity-price-fake-container .product-detail-price-container,
-            .k2p-quantity-price-fake-container .w-full {
-                display: none !important;
-            }
-
-            .k2p-quantity-price-fake-container .cart-item-quantity-wrapper {
-                order: 5;
-                flex: 0 0 auto;
-                flex-wrap: nowrap;
-                width: 114px !important;
-                height: 48px;
-                margin: 16px 0 8px !important;
-
-                .btn {
-                    width: 30px;
-                    height: 46px;
-                }
-
-                .form-control {
-                    width: 54px;
-                    height: 46px;
-                    line-height: 46px;
-                }
-            }
-
-            .buy-widget-container .col-sm {
-                order: 5;
-                flex: 1 1 0%;
-                width: auto;
-                min-width: 0;
-                margin: 16px 0 8px;
-                padding: 0;
-
-                @media (max-width: $mobile) {
-                    .btn-buy {
-                        padding-right: 12px;
-                        padding-left: 12px;
-                    }
-                }
-            }
-
-            .huebert-accessories-container,
-            .huebert-direct-accessories-block,
-            #accessoryAccordion {
-                margin-top: 0 !important;
-                margin-bottom: 0 !important;
-            }
-        }
-
-        .ab-t011-qty-moved {
-            display: none !important;
         }
 
         @media (min-width: 1920px) {
             .buy-widget-container {
                 margin-bottom: 5px !important;
-            }
-        }
-
-        .buy-widget-container:has(fieldset .product-detail-quantity-group) {
-            flex-wrap: nowrap;
-            column-gap: 12px;
-            margin-right: 0;
-            margin-left: 0;
-
-            @media (max-width: $mobile) {
-                column-gap: 10px;
-            }
-
-            fieldset {
-                flex: 0 0 114px;
-                width: 114px;
-                max-width: 114px;
-                margin: 8px 0;
-                padding: 0;
-            }
-
-            .product-detail-quantity-group {
-                flex-wrap: nowrap;
-                width: 114px;
-                height: 48px;
-
-                .btn {
-                    width: 30px;
-                    height: 46px;
-                }
-
-                .form-control {
-                    width: 54px;
-                    height: 46px;
-                    line-height: 46px;
-                }
-            }
-
-            .col-sm {
-                flex: 1 1 0%;
-                width: auto;
-                min-width: 0;
-                margin: 8px 0;
-                padding: 0;
-
-                @media (max-width: $mobile) {
-                    .btn-buy {
-                        padding-right: 12px;
-                        padding-left: 12px;
-                    }
-                }
-            }
-        }
-
-        .buy-widget-container:has(.cart-item-quantity-wrapper) {
-            flex-wrap: nowrap;
-            column-gap: 12px;
-            margin-right: 0;
-            margin-left: 0;
-
-            @media (max-width: $mobile) {
-                column-gap: 10px;
-            }
-
-            .cart-item-quantity-wrapper {
-                flex: 0 0 auto;
-                flex-wrap: nowrap;
-                width: 114px !important;
-                height: 48px;
-                margin: 8px 0 !important;
-
-                .btn {
-                    width: 30px;
-                    height: 46px;
-                }
-
-                .form-control {
-                    width: 54px;
-                    height: 46px;
-                    line-height: 46px;
-                }
-            }
-
-            .col-sm {
-                flex: 1 1 0%;
-                width: auto;
-                min-width: 0;
-                padding: 0;
-
-                @media (max-width: $mobile) {
-                    .btn-buy {
-                        padding-right: 12px;
-                        padding-left: 12px;
-                    }
-                }
             }
         }
 
@@ -446,7 +252,7 @@ $xs: 575.98px;
         #swp-productoptions--container-wrapper {
             .swp-productoptions-product--section-required-info {
                 align-items: flex-start;
-                margin-bottom: 0;
+                margin-bottom: 16px;
                 font-size: 13px;
                 line-height: 19px;
 

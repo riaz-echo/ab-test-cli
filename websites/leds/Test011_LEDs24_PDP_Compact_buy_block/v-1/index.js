@@ -8,10 +8,6 @@
             optionLabel: ".swp-productoptions-product--group__optionsWrapper .form-check.option-image .productoptions-info-section label.form-check-label",
             infoText: ".swp-productoptions-product--section-required-info > div",
             recoHeading: "#swp-productoptions--input-wrapper > .mt-4",
-            qtyContainer: ".k2p-quantity-price-container",
-            qtyField: "[data-quantity-field]",
-            buyRow: "#productDetailPageBuyProductForm .buy-widget-container",
-            totals: ".js-accesories-totals-without-bundle",
         },
         classes: {
             body: "ab-t011-v1",
@@ -21,7 +17,6 @@
             recoHeading: "ab-t011-reco-heading",
             recoText: "ab-t011-reco-text",
             optWrap: "ab-t011-opt--wrap",
-            qtyMoved: "ab-t011-qty-moved",
         },
         texts: {
             info: "Anschlussfertig geliefert: Ihre gewählten Kabel werden direkt am Streifen montiert.",
@@ -113,20 +108,6 @@
         });
     }
 
-    function renderQuantity(buy) {
-        const container = buy.querySelector(CONFIG.selectors.qtyContainer);
-        const row = buy.querySelector(CONFIG.selectors.buyRow);
-        const buyCol = row && row.querySelector(":scope > .col-12");
-        if (!container || !buyCol || !buy.querySelector(CONFIG.selectors.totals)) return;
-
-        const field = container.querySelector(CONFIG.selectors.qtyField);
-        if (field) row.insertBefore(field, buyCol);
-        container.classList.add(CONFIG.classes.qtyMoved);
-        if (container.nextElementSibling && container.nextElementSibling.querySelector(".product-detail-tax-container")) {
-            container.nextElementSibling.classList.add(CONFIG.classes.qtyMoved);
-        }
-    }
-
     function renderTexts(buy) {
         const info = buy.querySelector(CONFIG.selectors.infoText);
         if (info && /anschlussbereit/i.test(info.textContent) && info.textContent.trim() !== CONFIG.texts.info) {
@@ -166,7 +147,6 @@
         renderOptionLabels(buy);
         updateOptionWraps(buy);
         renderTexts(buy);
-        renderQuantity(buy);
         initTaxModals(buy);
     }
 
