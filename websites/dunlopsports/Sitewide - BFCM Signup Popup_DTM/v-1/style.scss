@@ -1,0 +1,73 @@
+$prefix: "ab-bfcm";
+
+/* Sticky trigger – left centre */
+.#{$prefix}-sticky {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  z-index: 1030; // below Bootstrap modal backdrop (1040) / modal (1050)
+  transform: translateY(-50%);
+  padding: 16px 10px;
+  border: 0;
+  border-radius: 0 6px 6px 0;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  transition: padding-left 0.2s ease, background 0.2s ease;
+
+  span {
+    display: block;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+
+  &:hover,
+  &:focus-visible {
+    padding-left: 14px;
+    background: #222;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #da291c;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+}
+
+/* Image overlay on top of the iframe's image panel */
+.#{$prefix}-frame-wrap {
+  position: relative;
+
+  iframe {
+    display: block;
+  }
+}
+
+.#{$prefix}-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 328 / 170; // iframe mobile layout: banner on top
+  background-color: #e7e9e8;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.#{$prefix}-frame-wrap--desktop .#{$prefix}-image {
+  width: 45%; // iframe desktop layout: left 45% column, full height
+  height: 100%;
+  aspect-ratio: auto;
+}

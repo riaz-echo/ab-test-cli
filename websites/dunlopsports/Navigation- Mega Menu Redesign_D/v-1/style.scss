@@ -1,0 +1,280 @@
+$mm-text: var(--ab-mm-text);
+$mm-text-muted: var(--ab-mm-text-muted);
+$mm-red: var(--ab-mm-accent);
+$mm-red-label: var(--ab-mm-label);
+$mm-divider: var(--ab-mm-divider);
+$mm-bg: var(--ab-mm-bg);
+$mm-panel-bg: var(--ab-mm-panel-bg);
+
+$mm-pad-left: clamp(24px, 8.33vw, 120px);
+$mm-gap: clamp(24px, 3.05vw, 44px);
+
+body.ab--mm-redesign {
+  --ab-mm-text: #111111;
+  --ab-mm-text-muted: #5a5a5a;
+  --ab-mm-accent: #d7261e;
+  --ab-mm-label: #e4002b;
+  --ab-mm-divider: #e3e3e3;
+  --ab-mm-bg: #ffffff;
+  --ab-mm-panel-bg: #f5f5f5;
+  li.ab--mm-top {
+    &:hover,
+    &.show,
+    &.ab--mm-current {
+      > .dropdown-link,
+      > .dropdown-link .category-name {
+        color: $mm-red;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        text-decoration: underline;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .ab--mm-host {
+    > .column {
+      display: none !important;
+    }
+  }
+
+  .ab--mm {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background: $mm-bg;
+    font-family: var(--global-font), sans-serif;
+    line-height: 1;
+    text-transform: none;
+    white-space: nowrap;
+    text-align: left;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        text-decoration: underline;
+      }
+    }
+
+    &__arrow {
+      margin-left: 6px;
+    }
+
+    // ---------- Category columns ----------
+    &__cols {
+      display: flex;
+      flex-direction: row;
+      gap: $mm-gap;
+      padding: 28px $mm-gap 32px $mm-pad-left;
+    }
+
+    &__col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__head {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding-bottom: 14px;
+    }
+
+    &__title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: $mm-text !important;
+    }
+
+    &__accent {
+      display: block;
+      width: 28px;
+      height: 3px;
+      background: $mm-red;
+    }
+
+    &__shop-all {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: $mm-red !important;
+    }
+
+    &__divider {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: $mm-divider;
+    }
+
+    &__series {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      padding-top: 16px !important;
+    }
+
+    &__series-link {
+      font-size: 14px;
+      font-weight: 400;
+      color: $mm-text !important;
+    }
+
+    &__tools {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      padding-top: 20px;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+    }
+
+    &__group-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: $mm-red-label;
+    }
+
+    &__tool-link {
+      font-size: 13px;
+      font-weight: 400;
+      color: $mm-text-muted !important;
+    }
+
+    &__explore {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+      padding: 28px clamp(24px, 2.78vw, 40px) 32px clamp(24px, 2.22vw, 32px);
+      background: $mm-panel-bg;
+    }
+
+    &__explore-head {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    &__explore-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &__explore-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: $mm-text-muted !important;
+    }
+
+    &__trade-in {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 14px 16px;
+      background: $mm-bg;
+      border: 1px solid $mm-divider;
+      border-radius: 4px;
+      white-space: normal;
+    }
+
+    &__trade-in-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: $mm-text !important;
+    }
+
+    &__trade-in-body {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1;
+      color: $mm-text-muted;
+    }
+
+    &__trade-in-link {
+      font-size: 12px;
+      font-weight: 700;
+      color: $mm-red !important;
+    }
+
+    // ---------- Layout variants ----------
+    // Gear / Limited Edition / Tour / Sale: no Explore panel, columns centered.
+    &--center .ab--mm__cols {
+      flex: 1;
+      justify-content: center;
+      padding-left: $mm-gap;
+    }
+
+    // Header-only columns (Limited Edition, Tour, Sale): no divider / series.
+    &__col--head-only .ab--mm__head {
+      padding-bottom: 0;
+    }
+
+    // Fitting: single column pushed right (526px of 1438 on the artboard).
+    &--fitting .ab--mm__cols {
+      padding-left: 36.5%;
+    }
+
+    // Narrow desktop (992–1279): let columns share the width and wrap long names.
+    @media (max-width: 1279.98px) {
+      &__cols {
+        flex: 1 1 auto;
+        min-width: 0;
+        gap: 20px;
+        padding-right: 20px;
+        padding-left: 24px;
+      }
+
+      &__col {
+        flex: 0 1 auto;
+        min-width: 0;
+        white-space: normal;
+        line-height: 1.15;
+      }
+
+      &__explore {
+        flex: 0 0 220px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      &--center .ab--mm__cols {
+        padding-left: 20px;
+      }
+
+      &--fitting .ab--mm__cols {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
