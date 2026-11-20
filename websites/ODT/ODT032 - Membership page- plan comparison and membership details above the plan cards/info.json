@@ -1,0 +1,13 @@
+{
+  "id": "1795191654797_3738_ODT032___Membership_page__plan_comparison_and_membership_details_above_the_plan_cards",
+  "name": "ODT032 - Membership page- plan comparison and membership details above the plan cards",
+  "type": "A/B",
+  "website": "ODT",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-11-20T16:20:54.797Z",
+  "createdAtReadable": "11/20/2026, 10:20:54 PM",
+  "lastUpdated": "2026-11-20T16:20:54.966Z"
+}
