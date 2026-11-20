@@ -1,0 +1,166 @@
+$p: "ab-t006";
+
+$navy: #133b89;
+$blue: #3b86e0;
+$divider: #8fc3e3;
+$box: #767676;
+$error: #bd2c2c;
+
+$mobile: "(max-width: 63.9988rem)";
+
+$form-path: ".paragraph--type--request-information .request-info-inner form.#{$p} .webform-request-info-inner";
+$form: "body.#{$p}-v1 #{$form-path}";
+
+#{$form} > .#{$p}-merged {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+
+#{$form} > .#{$p}-post {
+  flex-wrap: nowrap !important;
+  margin-bottom: 20px !important;
+}
+
+#{$form} > .#{$p}-consent--divider {
+  padding-top: 22px !important;
+  border-top: 1px solid $divider !important;
+}
+
+#{$form} > .#{$p}-consent .form-item-datenschutz {
+  position: relative;
+  min-height: 26px;
+  margin: 0 !important;
+  padding: 0 0 0 34px !important;
+
+  .form-check-input {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    float: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 !important;
+    border: 1px solid $box !important;
+    border-radius: 2.5px !important;
+    background-color: #fff !important;
+    background-position: center !important;
+    background-size: 100% 100% !important;
+    box-shadow: none !important;
+
+    &:checked {
+      border-color: $blue !important;
+      background-color: $blue !important;
+      background-image: var(--bs-form-check-bg-image) !important;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $blue;
+      outline-offset: 2px;
+    }
+
+    &.error {
+      border-color: $error !important;
+    }
+  }
+
+  .form-check-label {
+    display: block !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 13px !important;
+    line-height: 26px !important;
+  }
+}
+
+#{$form} > .#{$p}-consent--divider .form-item-datenschutz {
+  padding-left: 79px !important;
+
+  .form-check-input {
+    left: 16px;
+  }
+}
+
+@media #{$mobile} {
+  #{$form} > .#{$p}-consent:not(.#{$p}-consent--divider) .form-item-datenschutz .form-check-label {
+    line-height: 23px !important;
+  }
+}
+
+#{$form} > .#{$p}-actions {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-top: 4px !important;
+
+  .form-actions {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .form-actions .form-submit {
+    position: relative;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 50px !important;
+    margin: 0 !important;
+    padding: 0 20px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 27px !important;
+    white-space: nowrap;
+
+    &::after {
+      position: static !important;
+      flex: 0 0 auto;
+      margin-left: 12px !important;
+      transform: none !important;
+    }
+  }
+}
+
+#{$form} .#{$p}-note {
+  margin: 12px 0 0 !important;
+  padding: 0 !important;
+  color: $navy;
+  font-size: 12px !important;
+  line-height: 19px !important;
+  text-align: center !important;
+
+  .ajax-wrapper {
+    display: inline;
+  }
+
+  a {
+    color: $blue;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+  }
+}
+
+@each $group in campus, flex {
+  body.page-target-group--#{$group}.#{$p}-v1 #{$form-path} .#{$p}-note {
+    &,
+    a {
+      color: #fff;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}

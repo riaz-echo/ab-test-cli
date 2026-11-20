@@ -1,0 +1,13 @@
+{
+  "id": "1795176946326_2324_Test006_PFH_Sitewide_Infopaket_form__Toggle_and_checkmark_texts",
+  "name": "Test006-PFH-Sitewide-Infopaket form- Toggle and checkmark texts",
+  "type": "A/B",
+  "website": "pfh",
+  "variations": [
+    "control",
+    "v-1"
+  ],
+  "createdAt": "2026-11-20T12:15:46.326Z",
+  "createdAtReadable": "11/20/2026, 6:15:46 PM",
+  "lastUpdated": "2026-11-20T12:15:46.551Z"
+}
