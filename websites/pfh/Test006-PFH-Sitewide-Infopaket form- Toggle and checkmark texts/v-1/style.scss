@@ -1,8 +1,9 @@
 $p: "ab-t006";
 
-$navy: #133b89;
+$faded-text: #5B5D60;
 $blue: #3b86e0;
-$divider: #8fc3e3;
+$divider: #D6D7D9;
+$divider-blue: #8FC3E3;
 $box: #767676;
 $error: #bd2c2c;
 
@@ -32,6 +33,10 @@ $form: "body.#{$p}-v1 #{$form-path}";
 #{$form} > .#{$p}-consent--divider {
   padding-top: 22px !important;
   border-top: 1px solid $divider !important;
+}
+
+body.page-target-group--distance.#{$p}-v1 #{$form-path} > .#{$p}-consent--divider {
+  border-top-color: $divider-blue !important;
 }
 
 #{$form} > .#{$p}-consent .form-item-datenschutz {
@@ -132,7 +137,8 @@ $form: "body.#{$p}-v1 #{$form-path}";
 #{$form} .#{$p}-note {
   margin: 12px 0 0 !important;
   padding: 0 !important;
-  color: $navy;
+  font-weight: 400 !important;
+  color: $faded-text;
   font-size: 12px !important;
   line-height: 19px !important;
   text-align: center !important;
