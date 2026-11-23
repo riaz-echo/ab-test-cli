@@ -1,24 +1,8 @@
-import testInfo from "./info.json" assert { type: "json" };
-
 (() => {
   const BODY_CLASS = "ab--mm-redesign";
   const HOST_CLASS = "ab--mm-host";
   const TOP_CLASS = "ab--mm-top";
   const CURRENT_CLASS = "ab--mm-current";
-
-  /*
-   * One entry per brand (key = <body data-brand>). Both brands share the same SFRA nav markup,
-   * so a new brand only needs its menu id + per-dropdown rules here, plus a colour theme in style.scss.
-   *
-   * menus: keyed by the id of the top-nav link (BALLS = #balls-sx, ...)
-   *   layout        "default" | "center" | "fitting"
-   *   explore       { title, fromHeaders: [...] }  -> standalone headers move into a static Explore panel
-   *   exploreColumn header of an existing column that becomes the grey Explore panel (keeps its link)
-   *   tradeIn       header of an existing column that becomes the Trade-In card
-   *   tools         link texts moved from the series list into "Tools & Fittings"
-   *   noShopAll     no "Shop All" link under headers
-   *   cta(title)    link text for header-only columns
-   */
   const BRANDS = {
     srixon: {
       menu: "#srixon-menu",
@@ -27,8 +11,9 @@ import testInfo from "./info.json" assert { type: "json" };
         "balls-sx": { explore: { title: "Explore", fromHeaders: ["ball selector", "personalized balls"] } },
         "clubs-sx": {
           exploreColumn: "explore",
+          exploreStatic: true,
           tradeIn: "trade-in program",
-          tools: ["iron personalization", "iron selector", "iron combo set builder", "driver selector"],
+          tools: ["iron personalization", "iron selector", "zxi iron lineup", "iron combo set builder", "driver selector"],
         },
         "gear-sx": { layout: "center" },
         "sx-limited": { layout: "center", cta: () => "Shop Collection" },
@@ -36,11 +21,13 @@ import testInfo from "./info.json" assert { type: "json" };
         "team-sx": { layout: "center", cta: (title) => (title.toLowerCase() === "video" ? "View Gallery" : "Learn More") },
         "sale-sx": { layout: "center", cta: (title) => `Shop ${title}` },
       },
-      // Header text overrides (keyed by header href) to match the design copy.
       headerLabels: {
         "/srixon/balls/z-star-series": "Z-Star Series",
         "/srixon/balls/q-star-series": "Q-Star Series",
         "/srixon/balls/soft-feel-series": "Soft-Feel",
+        "/srixon/gear/limited-edition": "Limited Editions",
+        "/srixon/srixon-golf-driver-selector-fitting.html": "Selectors",
+        "/srixon/events-sx.html": "Event",
       },
       shopAllLabels: {
         "/srixon/balls/z-star-series": "Shop All Z-STAR",
@@ -50,27 +37,9 @@ import testInfo from "./info.json" assert { type: "json" };
         "/srixon/gear/limited-edition": "Shop All Limited Editions",
       },
     },
-
-    // Cleveland Golf: placeholder until the client sends mockups. Uncomment + adjust to enable.
-    // clevelandgolf: {
-    //   menu: "#clevelandgolf-menu",
-    //   tradeInBody: "Get credit toward new clubs",
-    //   menus: {
-    //     "clubs-cg": {
-    //       tradeIn: "trade-in program",
-    //       tools: ["my custom wedge", "wedge selector", "rtz 2 personalization", "putter selector"],
-    //     },
-    //     "gear-cg": { layout: "center" },
-    //     "fitting-w": { layout: "fitting", exploreColumn: "events", noShopAll: true },
-    //     "video-cg": { layout: "center", cta: () => "Watch Now" },
-    //     "sale-cg": { layout: "center" },
-    //   },
-    //   headerLabels: {},
-    //   shopAllLabels: {},
-    // },
   };
 
-  let BRAND = null; // resolved from <body data-brand> once the body exists
+  let BRAND = null;
 
   function waitForElem(waitFor, callback, minElements = 1, isVariable = false, timer = 10000, frequency = 25) {
     const elements = isVariable ? window[waitFor] : document.querySelectorAll(waitFor);
@@ -104,7 +73,6 @@ import testInfo from "./info.json" assert { type: "json" };
   const link = (className, href, text, arrow) =>
     el("a", className, { href }, [el("span", "", {}, text), arrow ? el("span", "ab--mm__arrow", { "aria-hidden": "true" }, arrow) : null]);
 
-  // Read the live desktop dropdown: [{ title, href, links: [{ text, href }] }]
   function parseColumns(host) {
     return [...host.querySelectorAll(":scope > .column > ul > li")]
       .map((li) => {
@@ -153,7 +121,6 @@ import testInfo from "./info.json" assert { type: "json" };
       return column;
     }
 
-    column.appendChild(el("span", "ab--mm__divider", { "aria-hidden": "true" }));
     column.appendChild(
       el("ul", "ab--mm__series", {}, series.map((item) => el("li", "", {}, link("ab--mm__series-link", item.href, item.text))))
     );
@@ -206,7 +173,10 @@ import testInfo from "./info.json" assert { type: "json" };
     if (config.exploreColumn) {
       const exploreCol = takeColumn(columns, config.exploreColumn);
       const tradeIn = config.tradeIn ? takeColumn(columns, config.tradeIn) : null;
-      if (exploreCol) explore = explorePanel(exploreCol.title, exploreCol.href, exploreCol.links, tradeIn);
+      if (exploreCol) {
+        const title = BRAND.headerLabels[pathOf(exploreCol.href)] || exploreCol.title;
+        explore = explorePanel(title, config.exploreStatic ? null : exploreCol.href, exploreCol.links, tradeIn);
+      }
     }
 
     return el("div", `ab--mm ab--mm--${id} ab--mm--${config.layout || "default"}`, {}, [
@@ -227,10 +197,11 @@ import testInfo from "./info.json" assert { type: "json" };
     items.forEach((item) => {
       const topLink = item.querySelector(":scope > a.dropdown-link");
       const host = item.querySelector(":scope > .mega-menu.hidden-md-down");
-      if (!topLink || !host || host.querySelector(".ab--mm")) return;
+      if (!topLink) return;
 
       item.classList.add(TOP_CLASS);
       markCurrentSection(item, topLink);
+      if (!host || host.querySelector(".ab--mm")) return;
 
       const menu = buildMenu(topLink.id, host);
       if (!menu) return;
@@ -243,10 +214,9 @@ import testInfo from "./info.json" assert { type: "json" };
 
   function mainJs([body]) {
     const key = body.getAttribute("data-brand");
-    if (!BRANDS[key]) return; // brand not part of this test
+    if (!BRANDS[key]) return;
     BRAND = { key, ...BRANDS[key] };
 
-    console.table({ ID: testInfo.id, Variation: testInfo.name, Brand: key });
     waitForElem(`${BRAND.menu} .brand-navigation-container > .column > ul > li.dropdown-item`, init);
   }
 
